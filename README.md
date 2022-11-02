@@ -1,8 +1,8 @@
 ## 平台简介
 
-官方文档：[闲鹿技术](http://doc.xianlutech.com)
+文档：(http://doc.xianlutech.com)
 
-闲鹿工作流是基于若依分离版的工作流系统。
+基于若依分离版的工作流系统。
 演示地址：[http://47.103.25.40/](http://47.103.25.40/)
 
 * RuoYi-Vue 最新版 3.3.0
@@ -19,7 +19,7 @@
 7. 我的待办支持办理、转办、审批历史、进度查看；
 8. 我的已办支持表单查看、审批历史、进度查看。
     
-代码生成 CRUD + 流程设计 + 闲鹿工作流二次开发规范，业务表单绑定流程 SO EASY。
+代码生成 CRUD + 流程设计 ，业务表单绑定流程 SO EASY。
 更多功能正在开发中……
 
 ## 功能速览
@@ -192,19 +192,4 @@
 
 ![todo_procees](screenshot/todo_process.png)
 
-
-## 不分离版
-[https://gitee.com/calvinhwang123/RuoYi-Process](https://gitee.com/calvinhwang123/RuoYi-Process)
-
-
-## 闲鹿工作流分离版交流群
-
-QQ群：点击链接加入群聊【闲鹿工作流分离版3】：https://jq.qq.com/?_wv=1027&k=nliplFpB
-133534862（满）、603909590（满）、767590879
-
-## 视频和资料
-- 闲鹿工作流分离版二次开发文档
-![闲鹿工作流分离版二次开发文档](screenshot/06分离版讲义截图.png)
-- [【闲鹿课堂】2020最新 Activiti6整合SpringBoot2快速入门教程](https://www.bilibili.com/video/BV1Fp4y19729)
-- [从零开始打造 Activiti 6.x + Spring Boot 2.x 工作流管理系统](https://www.bilibili.com/video/BV1QJ411t7FC)
 
