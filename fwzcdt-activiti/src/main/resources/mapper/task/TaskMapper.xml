@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.activiti.mapper.TaskMapper">
+
+
+    <select id="findTodoList" resultType="java.util.Map">
+        SELECT * FROM (
+        SELECT
+        A.* ,ROWNUM rn
+        FROM
+        (
+        SELECT
+        A.*
+        FROM
+        (
+        SELECT DISTINCT
+        RES.*
+        FROM
+        ACT_RU_TASK RES
+        LEFT JOIN ACT_RU_IDENTITYLINK I ON I.TASK_ID_ = RES.ID_
+        WHERE
+        RES.SUSPENSION_STATE_ = 1
+        AND (
+        RES.ASSIGNEE_ = #{ userId }
+        OR (
+        RES.ASSIGNEE_ IS NULL
+        AND (
+        I.USER_ID_ = #{ userId }
+        OR I.GROUP_ID_ IN ( SELECT G.GROUP_ID_ FROM ACT_ID_MEMBERSHIP G WHERE G.USER_ID_ = #{ userId } )
+        )
+        )
+        )
+        ORDER BY
+        RES.CREATE_TIME_ DESC
+        ) A
+        ) A
+        WHERE
+        1 = 1
+        <if test='taskId != null'>
+            AND ID_ = #{ taskId }
+        </if>
+        <if test='taskName != null'>
+            AND NAME_ = #{ taskName }
+        </if>
+        <if test='instanceId != null'>
+            AND PROC_INST_ID_ = #{ instanceId }
+        </if>
+        AND ROWNUM &lt;= #{ pageSize }*(#{offset}+1)
+        ) WHERE rn &gt;= #{ pageSize }*(#{offset})
+    </select>
+
+    <select id="findDoneList" resultType="java.util.Map">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM rn FROM (
+        SELECT DISTINCT RES.* FROM ACT_HI_TASKINST RES WHERE RES.ASSIGNEE_ = #{ userId }
+        AND RES.END_TIME_ IS NOT NULL ORDER BY RES.END_TIME_ DESC
+        ) A WHERE ROWNUM &lt;= #{pageSize}*(#{offset}+1)
+        ) A
+        WHERE  ROWNUM &gt;= #{pageSize}*(#{offset})
+        <if test='taskId != null'> AND ID_ = #{taskId} </if>
+        <if test='taskName != null'> AND NAME_ = #{taskName} </if>
+        <if test='instanceId != null'> AND PROC_INST_ID_ = #{instanceId} </if>
+    </select>
+
+</mapper>

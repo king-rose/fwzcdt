@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.fwlb.mapper.OprServiceMapper">
+
+    <resultMap type="OprService" id="OprServiceResult">
+        <id     property="svcId"      column="SVC_ID"      />
+        <result property="svcCode"    column="SVC_CODE"    />
+        <result property="svcName"     column="SVC_NAME"     />
+        <result property="svcDes"   column="SVC_DES"   />
+        <result property="serviceHeadClass"    column="SERVICE_HEAD_CLASS"    />
+        <result property="serviceSmallClass"      column="SERVICE_SMALL_CLASS"      />
+        <result property="svcCreateTime"    column="SVC_CREATE_TIME"    />
+        <result property="svcCreateUser"      column="SVC_CREATE_USER"      />
+        <result property="svcUpdateTime"    column="SVC_UPDATE_TIME"    />
+        <result property="svcUpdateUser"    column="SVC_UPDATE_USER"    />
+        <result property="svcSgId"    column="SVC_SG_ID"    />
+    </resultMap>
+
+    <!--删除服务-->
+    <delete id="deleteOprService" parameterType="String">
+        delete from opr_service where SVC_ID = #{svcId}
+    </delete>
+    <!--列表查询-->
+    <select id="list" parameterType="OprService" resultMap="OprServiceResult">
+        select * from opr_service
+        <where>
+			<if test="svcName != null and svcName != ''">
+				AND SVC_NAME like concat(concat('%', #{svcName}), '%')
+			</if>
+		</where>
+    </select>
+
+    <select id="getServiceInfo" parameterType="String" resultType="java.util.Map">
+        SELECT
+        "os".SVC_ID AS "svcId",
+        "os".SVC_CODE AS "svcCode",
+        "os".SVC_NAME AS "svcName",
+        "os".SVC_DES AS "svcDes",
+        "os".SERVICE_HEAD_CLASS AS "serviceHeadClass",
+        "os".SERVICE_SMALL_CLASS AS "serviceSmallClass",
+        "os".SVC_CREATE_TIME AS "svcCreateTime",
+        "os".SVC_CREATE_USER AS "svcCreateUser",
+        "os".SVC_UPDATE_TIME AS "svcUpdateTime",
+        "os".SVC_UPDATE_USER AS "svcUpdateUser",
+        "os".SVC_SG_ID AS "svcSgId",
+        "os".SVC_THAN_STANDARD AS "svcThanStandard",
+        "os".SVC_DATA_SOURCE AS "svcDataSource"
+        FROM
+        opr_service "os"
+        <where>
+            <if test="svcId != null and svcId != ''">
+                AND "os".SVC_ID = #{svcId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectServiceById" resultType="oprService">
+         SELECT
+            "os".SVC_ID AS "svcId",
+            "os".SVC_CODE AS "svcCode",
+            "os".SVC_NAME AS "svcName",
+            "os".SVC_DES AS "svcDes",
+            "os".SERVICE_HEAD_CLASS AS "serviceHeadClass",
+            "os".SERVICE_SMALL_CLASS AS "serviceSmallClass",
+            "os".SVC_CREATE_TIME AS "svcCreateTime",
+            "os".SVC_CREATE_USER AS "svcCreateUser",
+            "os".SVC_UPDATE_TIME AS "svcUpdateTime",
+            "os".SVC_UPDATE_USER AS "svcUpdateUser",
+            "os".SVC_SG_ID AS "svcSgId",
+            "os".SVC_THAN_STANDARD AS "svcThanStandard",
+            "os".SVC_DATA_SOURCE AS "svcDataSource"
+            FROM
+            opr_service "os"
+            where "os".SVC_CODE = #{svcCode}
+    </select>
+
+
+    <!--批量导入-->
+    <insert id="saveBatch" parameterType="List">
+        insert into opr_service
+            (SVC_ID,SVC_CODE,SVC_NAME,SVC_DES,SERVICE_HEAD_CLASS,SERVICE_SMALL_CLASS,SVC_CREATE_TIME,SVC_CREATE_USER,SVC_SG_ID,SVC_UPDATE_TIME)
+        <foreach collection="list" item="item" separator="," index="index">
+            values ( #{item.svcId}, #{item.svcCode}, #{item.svcName}, #{item.svcDes}, #{item.serviceHeadClass},
+             #{item.serviceSmallClass}, #{item.svcCreateTime}, #{item.svcCreateUser}, #{item.svcSgId}, now())
+        </foreach>
+    </insert>
+
+    <!--新增服务信息-->
+    <insert id="addService" parameterType="oprService">
+        insert into opr_service
+        (
+            <if test = "svcId != null and svcId != ''">SVC_ID,</if>
+            <if test = "svcCode != null and svcCode != ''">SVC_CODE,</if>
+            <if test = "svcName != null and svcName != ''">SVC_NAME,</if>
+            <if test = "svcDes != null and svcDes != ''">SVC_DES,</if>
+            <if test = "serviceHeadClass != null and serviceHeadClass != ''">SERVICE_HEAD_CLASS,</if>
+            <if test = "serviceSmallClass != null and serviceSmallClass != ''">SERVICE_SMALL_CLASS,</if>
+            <if test = "svcCreateTime != null">SVC_CREATE_TIME,</if>
+            <if test = "svcCreateUser != null and svcCreateUser != ''">SVC_CREATE_USER,</if>
+            <if test = "svcUpdateTime != null">SVC_UPDATE_TIME,</if>
+            <if test = "svcUpdateUser != null and svcUpdateUser != ''">SVC_UPDATE_USER,</if>
+            <if test = "svcSgId != null and svcSgId != ''">SVC_SG_ID</if>
+        )
+        values
+        (
+            <if test = "svcId != null and svcId != ''">#{svcId},</if>
+            <if test = "svcCode != null and svcCode != ''">#{svcCode},</if>
+            <if test = "svcName != null and svcName != ''">#{svcName},</if>
+            <if test = "svcDes != null and svcDes != ''">#{svcDes},</if>
+            <if test = "serviceHeadClass != null and serviceHeadClass != ''">#{serviceHeadClass},</if>
+            <if test = "serviceSmallClass != null and serviceSmallClass != ''">#{serviceSmallClass},</if>
+            <if test = "svcCreateTime != null"> #{svcCreateTime},</if>
+            <if test = "svcCreateUser != null and svcCreateUser != ''">#{svcCreateUser},</if>
+            <if test = "svcUpdateTime != null">#{svcUpdateTime},</if>
+            <if test = "svcUpdateUser != null and svcUpdateUser != ''">#{svcUpdateUser},</if>
+            <if test = "svcSgId != null and svcSgId != ''">#{svcSgId}</if>
+        )
+    </insert>
+
+    <!--服务编辑-->
+    <update id="updateService" parameterType="oprService">
+         update opr_service
+        <set>
+            <if test="svcCode != null and svcCode != ''">SVC_CODE = #{svcCode},</if>
+            <if test="svcName != null and svcName != ''">SVC_NAME = #{svcName},</if>
+            <if test="svcDes != null and svcDes != ''">SVC_DES = #{svcDes},</if>
+            <if test="serviceHeadClass != null and serviceHeadClass != ''">SERVICE_HEAD_CLASS = #{serviceHeadClass},</if>
+            <if test="serviceSmallClass != null and serviceSmallClass != ''">SERVICE_SMALL_CLASS = #{serviceSmallClass},</if>
+            <if test="svcCreateTime != null">SVC_CREATE_TIME = #{svcCreateTime},</if>
+            <if test="svcCreateUser != null and svcCreateUser != ''">SVC_CREATE_USER = #{svcCreateUser},</if>
+            <if test="svcUpdateTime != null">SVC_UPDATE_TIME = #{svcUpdateTime},</if>
+            <if test="svcUpdateUser != null and svcUpdateUser != ''">SVC_UPDATE_USER = #{svcUpdateUser},</if>
+            <if test="svcSgId != null and svcSgId != ''">SVC_SG_ID = #{svcSgId},</if>
+        </set>
+        where SVC_ID = #{svcId}
+    </update>
+
+    <select id = "getHeadClassList" resultType="string">
+        SELECT DISTINCT SERVICE_HEAD_CLASS FROM OPR_SERVICE
+    </select>
+
+    <select id = "getSmallClassList" resultType="string">
+        SELECT DISTINCT SERVICE_SMALL_CLASS FROM OPR_SERVICE
+    </select>
+
+</mapper>

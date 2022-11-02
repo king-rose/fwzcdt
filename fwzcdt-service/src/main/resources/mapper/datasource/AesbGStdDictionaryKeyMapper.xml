@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.dsource.mapper.AesbGStdDictionaryKeyMapper">
+    
+    <resultMap type="AesbGStdDictionaryKey" id="AesbGStdDictionaryKeyResult">
+        <result property="stdDictId"    column="STD_DICT_ID"    />
+        <result property="stdDictKeyGroup"    column="STD_DICT_KEY_GROUP"    />
+        <result property="stdType"    column="STD_TYPE"    />
+        <result property="stdCode"    column="STD_CODE"    />
+        <result property="stdNameCn"    column="STD_NAME_CN"    />
+        <result property="stdDictKey"    column="STD_DICT_KEY"    />
+        <result property="stdDictKeyRel"    column="STD_DICT_KEY_REL"    />
+        <result property="stdData"    column="STD_DATA"    />
+        <result property="stdDictType"    column="STD_DICT_TYPE"    />
+        <result property="stdDictLength"    column="STD_DICT_LENGTH"    />
+        <result property="stdDictNumber"    column="STD_DICT_NUMBER"    />
+        <result property="stdDictFormat"    column="STD_DICT_FORMAT"    />
+        <result property="stdDictDesc"    column="STD_DICT_DESC"    />
+        <result property="enable"    column="ENABLE"    />
+        <result property="crtTime"    column="CRT_TIME"    />
+        <result property="stdRef"    column="STD_REF"    />
+        <result property="stdDictLengthType"    column="STD_DICT_LENGTH_TYPE"    />
+    </resultMap>
+
+    <sql id="selectAesbGStdDictionaryKeyVo">
+        select
+            STD_DICT_ID,
+            STD_DICT_KEY_GROUP,
+            STD_TYPE, STD_CODE,
+            STD_NAME_CN,
+            STD_DICT_KEY,
+            STD_DICT_KEY_REL,
+            STD_DATA,
+            STD_DICT_TYPE,
+            STD_DICT_LENGTH,
+            STD_DICT_NUMBER,
+            STD_DICT_FORMAT,
+            STD_DICT_DESC,
+            ENABLE,
+            CRT_TIME,
+            STD_REF,
+            STD_DICT_LENGTH_TYPE
+        from aesb_g_std_dictionary_key
+    </sql>
+
+    <select id="selectAesbGStdDictionaryKeyList" parameterType="AesbGStdDictionaryKey" resultMap="AesbGStdDictionaryKeyResult">
+        <include refid="selectAesbGStdDictionaryKeyVo"/>
+        <where>
+            <if test="keywords != ''and keywords != null" >
+                <if test="!search">
+                    STD_DICT_KEY like concat(concat('%',#{keywords,jdbcType=VARCHAR}),'%')  or STD_DICT_TYPE = #{keywords,jdbcType=VARCHAR}
+                </if>
+                <if test="search">
+                    STD_DICT_KEY = #{keywords,jdbcType=VARCHAR} or STD_DICT_TYPE = #{keywords,jdbcType=VARCHAR}
+                </if>
+            </if>
+            <if test="stdDictKeyGroup != null  and stdDictKeyGroup != ''"> and STD_DICT_KEY_GROUP = #{stdDictKeyGroup}</if>
+            <if test="stdType != null  and stdType != ''"> and STD_TYPE = #{stdType}</if>
+            <if test="stdCode != null  and stdCode != ''"> and STD_CODE = #{stdCode}</if>
+            <if test="stdNameCn != null  and stdNameCn != ''"> and STD_NAME_CN = #{stdNameCn}</if>
+            <if test="stdDictKey != null  and stdDictKey != ''"> and STD_DICT_KEY = #{stdDictKey}</if>
+            <if test="stdDictKeyRel != null  and stdDictKeyRel != ''"> and STD_DICT_KEY_REL = #{stdDictKeyRel}</if>
+            <if test="stdData != null  and stdData != ''"> and STD_DATA = #{stdData}</if>
+            <if test="stdDictType != null  and stdDictType != ''"> and STD_DICT_TYPE = #{stdDictType}</if>
+            <if test="stdDictLength != null  and stdDictLength != ''"> and STD_DICT_LENGTH = #{stdDictLength}</if>
+            <if test="stdDictNumber != null  and stdDictNumber != ''"> and STD_DICT_NUMBER = #{stdDictNumber}</if>
+            <if test="stdDictFormat != null  and stdDictFormat != ''"> and STD_DICT_FORMAT = #{stdDictFormat}</if>
+            <if test="stdDictDesc != null  and stdDictDesc != ''"> and STD_DICT_DESC = #{stdDictDesc}</if>
+            <if test="enable != null  and enable != ''"> and ENABLE = #{enable}</if>
+            <if test="crtTime != null "> and CRT_TIME = #{crtTime}</if>
+            <if test="stdRef != null  and stdRef != ''"> and STD_REF = #{stdRef}</if>
+            <if test="stdDictLengthType != null  and stdDictLengthType != ''"> and STD_DICT_LENGTH_TYPE = #{stdDictLengthType}</if>
+        </where>
+    </select>
+    
+    <select id="selectAesbGStdDictionaryKeyById" parameterType="String" resultMap="AesbGStdDictionaryKeyResult">
+        <include refid="selectAesbGStdDictionaryKeyVo"/>
+        where STD_DICT_ID = #{stdDictId}
+    </select>
+        
+    <insert id="insertAesbGStdDictionaryKey" parameterType="AesbGStdDictionaryKey">
+        insert into aesb_g_std_dictionary_key
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stdDictId != null">STD_DICT_ID,</if>
+            <if test="stdDictKeyGroup != null">STD_DICT_KEY_GROUP,</if>
+            <if test="stdType != null">STD_TYPE,</if>
+            <if test="stdCode != null">STD_CODE,</if>
+            <if test="stdNameCn != null">STD_NAME_CN,</if>
+            <if test="stdDictKey != null">STD_DICT_KEY,</if>
+            <if test="stdDictKeyRel != null">STD_DICT_KEY_REL,</if>
+            <if test="stdData != null">STD_DATA,</if>
+            <if test="stdDictType != null">STD_DICT_TYPE,</if>
+            <if test="stdDictLength != null">STD_DICT_LENGTH,</if>
+            <if test="stdDictNumber != null">STD_DICT_NUMBER,</if>
+            <if test="stdDictFormat != null">STD_DICT_FORMAT,</if>
+            <if test="stdDictDesc != null">STD_DICT_DESC,</if>
+            <if test="enable != null">ENABLE,</if>
+            <if test="crtTime != null">CRT_TIME,</if>
+            <if test="stdRef != null">STD_REF,</if>
+            <if test="stdDictLengthType != null">STD_DICT_LENGTH_TYPE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stdDictId != null">#{stdDictId},</if>
+            <if test="stdDictKeyGroup != null">#{stdDictKeyGroup},</if>
+            <if test="stdType != null">#{stdType},</if>
+            <if test="stdCode != null">#{stdCode},</if>
+            <if test="stdNameCn != null">#{stdNameCn},</if>
+            <if test="stdDictKey != null">#{stdDictKey},</if>
+            <if test="stdDictKeyRel != null">#{stdDictKeyRel},</if>
+            <if test="stdData != null">#{stdData},</if>
+            <if test="stdDictType != null">#{stdDictType},</if>
+            <if test="stdDictLength != null">#{stdDictLength},</if>
+            <if test="stdDictNumber != null">#{stdDictNumber},</if>
+            <if test="stdDictFormat != null">#{stdDictFormat},</if>
+            <if test="stdDictDesc != null">#{stdDictDesc},</if>
+            <if test="enable != null">#{enable},</if>
+            <if test="crtTime != null">#{crtTime},</if>
+            <if test="stdRef != null">#{stdRef},</if>
+            <if test="stdDictLengthType != null">#{stdDictLengthType},</if>
+         </trim>
+    </insert>
+    <insert id="foreachAddAesbGStdDictionaryKey"  parameterType="java.util.List">
+        begin
+        <foreach collection="list" item="data" index="index" >
+            insert into aesb_g_std_dictionary_key(
+                STD_DICT_ID,
+                STD_DICT_KEY_GROUP,
+                STD_TYPE,
+                STD_CODE,
+                STD_NAME_CN,
+                STD_DICT_KEY,
+                STD_DICT_KEY_REL,
+                STD_DATA,
+                STD_DICT_TYPE,
+                STD_DICT_LENGTH,
+                STD_DICT_NUMBER,
+                STD_DICT_FORMAT,
+                STD_DICT_DESC,
+                ENABLE,
+                CRT_TIME,
+                STD_REF,
+                STD_DICT_LENGTH_TYPE
+            )values(
+                #{data.stdDictId},
+                #{data.stdDictKeyGroup,jdbcType=VARCHAR},
+                #{data.stdType,jdbcType=VARCHAR},
+                #{data.stdCode,jdbcType=VARCHAR},
+                #{data.stdNameCn,jdbcType=VARCHAR},
+                #{data.stdDictKey,jdbcType=VARCHAR},
+                #{data.stdDictKeyRel,jdbcType=VARCHAR},
+                #{data.stdData,jdbcType=VARCHAR},
+                #{data.stdDictType,jdbcType=VARCHAR},
+                #{data.stdDictLength,jdbcType=VARCHAR},
+                #{data.stdDictNumber,jdbcType=VARCHAR},
+                #{data.stdDictFormat,jdbcType=VARCHAR},
+                #{data.stdDictDesc,jdbcType=VARCHAR},
+                #{data.enable,jdbcType=VARCHAR},
+                sysdate,
+                #{data.stdRef,jdbcType=VARCHAR},
+                #{data.stdDictLengthType,jdbcType=VARCHAR}
+                );
+        </foreach>
+        end;
+    </insert>
+    <update id="updateAesbGStdDictionaryKey" parameterType="AesbGStdDictionaryKey">
+        update aesb_g_std_dictionary_key
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stdDictKeyGroup != null">STD_DICT_KEY_GROUP = #{stdDictKeyGroup},</if>
+            <if test="stdType != null">STD_TYPE = #{stdType},</if>
+            <if test="stdCode != null">STD_CODE = #{stdCode},</if>
+            <if test="stdNameCn != null">STD_NAME_CN = #{stdNameCn},</if>
+            <if test="stdDictKey != null">STD_DICT_KEY = #{stdDictKey},</if>
+            <if test="stdDictKeyRel != null">STD_DICT_KEY_REL = #{stdDictKeyRel},</if>
+            <if test="stdData != null">STD_DATA = #{stdData},</if>
+            <if test="stdDictType != null">STD_DICT_TYPE = #{stdDictType},</if>
+            <if test="stdDictLength != null">STD_DICT_LENGTH = #{stdDictLength},</if>
+            <if test="stdDictNumber != null">STD_DICT_NUMBER = #{stdDictNumber},</if>
+            <if test="stdDictFormat != null">STD_DICT_FORMAT = #{stdDictFormat},</if>
+            <if test="stdDictDesc != null">STD_DICT_DESC = #{stdDictDesc},</if>
+            <if test="enable != null">ENABLE = #{enable},</if>
+            <if test="crtTime != null">CRT_TIME = #{crtTime},</if>
+            <if test="stdRef != null">STD_REF = #{stdRef},</if>
+            <if test="stdDictLengthType != null">STD_DICT_LENGTH_TYPE = #{stdDictLengthType},</if>
+        </trim>
+        where STD_DICT_ID = #{stdDictId}
+    </update>
+
+    <delete id="deleteAesbGStdDictionaryKeyById" parameterType="String">
+        delete from aesb_g_std_dictionary_key where STD_DICT_ID = #{stdDictId}
+    </delete>
+
+    <delete id="deleteAesbGStdDictionaryKeyByIds" parameterType="String">
+        delete from aesb_g_std_dictionary_key where STD_DICT_ID in 
+        <foreach item="stdDictId" collection="array" open="(" separator="," close=")">
+            #{stdDictId}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.project.mapper.AesbGSysProMappingMapper">
+    
+    <resultMap type="AesbGSysProMapping" id="AesbGSysProMappingResult">
+        <result property="systemId"    column="SYSTEM_ID"    />
+        <result property="systemUsage"    column="SYSTEM_USAGE"    />
+        <result property="projectCode"    column="PROJECT_CODE"    />
+    </resultMap>
+
+    <sql id="selectAesbGSysProMappingVo">
+        select SYSTEM_ID, SYSTEM_USAGE, PROJECT_CODE from aesb_g_sys_pro_mapping
+    </sql>
+
+    <select id="selectAesbGSysProMappingList" parameterType="AesbGSysProMapping" resultMap="AesbGSysProMappingResult">
+        <include refid="selectAesbGSysProMappingVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectAesbGSysProMappingById" parameterType="String" resultMap="AesbGSysProMappingResult">
+        <include refid="selectAesbGSysProMappingVo"/>
+        where SYSTEM_ID = #{systemId}
+    </select>
+        
+    <insert id="insertAesbGSysProMapping" parameterType="AesbGSysProMapping">
+        insert into aesb_g_sys_pro_mapping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="systemId != null">SYSTEM_ID,</if>
+            <if test="systemUsage != null">SYSTEM_USAGE,</if>
+            <if test="projectCode != null">PROJECT_CODE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="systemId != null">#{systemId},</if>
+            <if test="systemUsage != null">#{systemUsage},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAesbGSysProMapping" parameterType="AesbGSysProMapping">
+        update aesb_g_sys_pro_mapping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="systemUsage != null">SYSTEM_USAGE = #{systemUsage},</if>
+            <if test="projectCode != null">PROJECT_CODE = #{projectCode},</if>
+        </trim>
+        where SYSTEM_ID = #{systemId}
+    </update>
+
+    <delete id="deleteAesbGSysProMappingById" parameterType="String">
+        delete from aesb_g_sys_pro_mapping where SYSTEM_ID = #{systemId}
+    </delete>
+
+    <delete id="deleteAesbGSysProMappingByIds" parameterType="String">
+        delete from aesb_g_sys_pro_mapping where SYSTEM_ID in 
+        <foreach item="systemId" collection="array" open="(" separator="," close=")">
+            #{systemId}
+        </foreach>
+    </delete>
+    
+</mapper>

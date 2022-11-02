@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.demand.mapper.AesbGDemandInfoMapper">
+
+    <resultMap type="AesbGDemandInfo" id="AesbGDemandInfoResult">
+        <result property="demandId" column="DEMAND_ID"/>
+        <result property="demandName" column="DEMAND_NAME"/>
+        <result property="demandDes" column="DEMAND_DES"/>
+        <result property="plantFinishTime" column="PLANT_FINISH_TIME"/>
+        <result property="applyTime" column="APPLICATION_TIME"/>
+        <result property="applyUserName" column="APPLICATION_USER"/>
+        <result property="registrationTime" column="REGISTRATION_TIME"/>
+        <result property="serviceSystemId" column="SERVICE_SYSTEM_ID"/>
+        <result property="serviceSystemUserId" column="SERVICE_SYSTEM_USER_ID"/>
+        <result property="taskState" column="TASK_STATE"/>
+        <result property="demandState" column="DEMAND_STATE"/>
+        <result property="changeContent" column="CHANGE_CONTENT"/>
+        <result property="changeReason" column="CHANGE_REASON"/>
+        <result property="changeCycle" column="CHANGE_CYCLE"/>
+        <result property="delayTime" column="DELAY_TIME"/>
+        <result property="closeReason" column="CLOSE_REASON"/>
+        <result property="instanceId" column="INSTANCE_ID"/>
+        <result property="processKey" column="PROCESS_KEY"/>
+
+        <result property="isAccept" column="IS_ACCEPT"/>
+        <result property="acceptTime" column="ACCEPT_TIME"/>
+        <result property="acceptContent" column="ACCEPT_CONTENT"/>
+
+    </resultMap>
+
+    <sql id="selectAesbGDemandInfoVo">
+        select
+               DEMAND_ID,
+               DEMAND_NAME,
+               DEMAND_DES,
+               PLANT_FINISH_TIME,
+               APPLICATION_TIME,
+               APPLICATION_USER,
+               REGISTRATION_TIME,
+               SERVICE_SYSTEM_ID,
+               SERVICE_SYSTEM_USER_ID,
+               TASK_STATE,
+               DEMAND_STATE,
+               CHANGE_CONTENT,
+               CHANGE_REASON,
+               CHANGE_CYCLE,
+               DELAY_TIME,
+               CLOSE_REASON,
+               INSTANCE_ID,
+               PROCESS_KEY,
+               IS_ACCEPT,
+               ACCEPT_TIME,
+               ACCEPT_CONTENT
+        from aesb_g_demand_info
+    </sql>
+
+    <select id="selectAesbGDemandInfoList" parameterType="AesbGDemandInfo" resultMap="AesbGDemandInfoResult">
+        <include refid="selectAesbGDemandInfoVo"/>
+        <where>
+            <if test="demandId != null  and demandId != ''">and DEMAND_ID like concat(concat('%', #{demandId}), '%')</if>
+            <if test="demandName != null  and demandName != ''">and DEMAND_NAME like concat(concat('%', #{demandName}), '%')</if>
+            <if test="applyUserName != null  and applyUserName != ''">and APPLICATION_USER = #{applyUserName}</if>
+            <if test="demandState != null  and demandState != ''">and DEMAND_STATE = #{demandState}</if>
+            <if test="taskState != null  and taskState != ''">and TASK_STATE = #{taskState}</if>
+        </where>
+        <if test="params.orderBy == 'ASC'"><!-- 开始时间检索 -->
+            ORDER BY APPLICATION_TIME ASC
+        </if>
+        <if test="params.orderBy == 'DESC'"><!-- 开始时间检索 -->
+            ORDER BY APPLICATION_TIME DESC
+        </if>
+    </select>
+
+    <select id="selectAesbGDemandInfoById" parameterType="String" resultMap="AesbGDemandInfoResult">
+        <include refid="selectAesbGDemandInfoVo"/>
+        where DEMAND_ID = #{demandId}
+    </select>
+
+    <insert id="insertAesbGDemandInfo" parameterType="AesbGDemandInfo">
+        insert into aesb_g_demand_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="demandId != null">DEMAND_ID,</if>
+            <if test="demandName != null and demandName != ''">DEMAND_NAME,</if>
+            <if test="demandDes != null and demandDes != ''">DEMAND_DES,</if>
+            <if test="plantFinishTime != null">PLANT_FINISH_TIME,</if>
+            <if test="applyTime != null">APPLICATION_TIME,</if>
+            <if test="applyUserName != null and applyUserName != ''">APPLICATION_USER,</if>
+            <if test="registrationTime != null">REGISTRATION_TIME,</if>
+            <if test="serviceSystemId != null">SERVICE_SYSTEM_ID,</if>
+            <if test="serviceSystemUserId != null">SERVICE_SYSTEM_USER_ID,</if>
+            <if test="taskState != null">TASK_STATE,</if>
+            <if test="demandState != null">DEMAND_STATE,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="demandId != null">#{demandId},</if>
+            <if test="demandName != null and demandName != ''">#{demandName},</if>
+            <if test="demandDes != null and demandDes != ''">#{demandDes},</if>
+            <if test="plantFinishTime != null">#{plantFinishTime},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+            <if test="applyUserName != null and applyUserName != ''">#{applyUserName},</if>
+            <if test="registrationTime != null">#{registrationTime},</if>
+            <if test="serviceSystemId != null">#{serviceSystemId},</if>
+            <if test="serviceSystemUserId != null">#{serviceSystemUserId},</if>
+            <if test="taskState != null">#{taskState},</if>
+            <if test="demandState != null">#{demandState},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAesbGDemandInfo" parameterType="AesbGDemandInfo">
+        update aesb_g_demand_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="demandName != null and demandName != ''">DEMAND_NAME = #{demandName},</if>
+            <if test="demandDes != null and demandDes != ''">DEMAND_DES = #{demandDes},</if>
+            <if test="plantFinishTime != null">PLANT_FINISH_TIME = #{plantFinishTime},</if>
+            <if test="applyTime != null">APPLICATION_TIME = #{applyTime},</if>
+            <if test="applyUserName != null and applyUserName != ''">APPLICATION_USER = #{applyUserName},</if>
+            <if test="registrationTime != null">REGISTRATION_TIME = #{registrationTime},</if>
+            <if test="serviceSystemId != null">SERVICE_SYSTEM_ID = #{serviceSystemId},</if>
+            <if test="serviceSystemUserId != null">SERVICE_SYSTEM_USER_ID = #{serviceSystemUserId},</if>
+            <if test="taskState != null">TASK_STATE = #{taskState},</if>
+            <if test="demandState != null">DEMAND_STATE = #{demandState},</if>
+            <if test="changeContent != null">CHANGE_CONTENT = #{changeContent},</if>
+            <if test="changeReason != null">CHANGE_REASON = #{changeReason},</if>
+            <if test="changeCycle != null">CHANGE_CYCLE = #{changeCycle},</if>
+            <if test="delayTime != null">DELAY_TIME = #{delayTime},</if>
+            <if test="closeReason != null">CLOSE_REASON = #{closeReason},</if>
+            <if test="instanceId != null and instanceId != ''">INSTANCE_ID = #{instanceId},</if>
+            <if test="processKey != null and processKey != ''">PROCESS_KEY = #{processKey},</if>
+
+            <if test="acceptTime != null ">ACCEPT_TIME = #{acceptTime},</if>
+            <if test="acceptUser != null and acceptUser!= ''">ACCEPT_USER = #{acceptUser},</if>
+            <if test="isAccept != null and isAccept!= ''">IS_ACCEPT = #{isAccept},</if>
+            <if test="acceptContent != null and acceptContent!= ''">ACCEPT_CONTENT = #{acceptContent},</if>
+        </trim>
+        where DEMAND_ID = #{demandId}
+    </update>
+
+    <delete id="deleteAesbGDemandInfoById" parameterType="String">
+        delete
+        from aesb_g_demand_info
+        where DEMAND_ID = #{demandId}
+    </delete>
+
+    <delete id="deleteAesbGDemandInfoByIds" parameterType="String">
+        delete from aesb_g_demand_info where DEMAND_ID = #{demandId}
+    </delete>
+
+    <insert id="insertAssociationDemand" parameterType="AesbSystemInterfaceDemand">
+        insert into aesb_system_interface_demand
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">ID,</if>
+            <if test="demandId != null and demandId != ''">DEMAND_ID,</if>
+            <if test="sysId != null and sysId != ''">SYS_ID,</if>
+            <if test="jkVersionId != null and jkVersionId != ''">JK_VERSION_ID,</if>
+            <if test="sysName != null and sysName != ''">SYS_NAME,</if>
+            <if test="jkNameCn != null and jkNameCn != ''">JK_NAME_CN,</if>
+            <if test="jkNameEn != null and jkNameEn != ''">JK_NAME_EN,</if>
+            <if test="principal != null and principal != ''">PRINCIPAL,</if>
+            <if test="createBy != null and createBy != ''">CREATE_BY,</if>
+            <if test="createTime != null">CREATE_TIME,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">#{id},</if>
+            <if test="demandId != null and demandId != ''">#{demandId},</if>
+            <if test="sysId != null and sysId != ''">#{sysId},</if>
+            <if test="jkVersionId != null and jkVersionId != ''">#{jkVersionId},</if>
+            <if test="sysName != null and sysName != ''">#{sysName},</if>
+            <if test="jkNameCn != null and jkNameCn != ''">#{jkNameCn},</if>
+            <if test="jkNameEn != null and jkNameEn != ''">#{jkNameEn},</if>
+            <if test="principal != null and principal != ''">#{principal},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <delete id="deleteAssociationDemand">
+        delete
+        from aesb_system_interface_demand
+        where DEMAND_ID = #{demandId}
+    </delete>
+
+    <select id="selectInterfaceDemandById" resultType="com.agree.web.demand.domain.AesbSystemInterfaceDemand">
+        SELECT
+        sid.DEMAND_ID AS demandId,
+        sid.SYS_ID AS sysId,
+        sid.SYS_NAME AS sysName,
+        sid.JK_VERSION_ID AS jkVersionId,
+        sid.JK_NAME_CN AS jkNameCn,
+        sid.JK_NAME_EN AS jkNameEn,
+        sid.PRINCIPAL AS principal,
+        sid.IS_ACCEPT AS isAccept,
+        sid.ACCEPT_TIME AS acceptTime,
+        sid.CREATE_TIME AS createTime,
+        sid.WORK_DAY AS workDay
+        FROM
+        aesb_system_interface_demand sid
+        WHERE
+        <if test="demandId != null and demandId != ''">
+            sid.DEMAND_ID = #{demandId}
+        </if>
+        <if test="principal != null and principal != ''">
+            AND sid.PRINCIPAL = #{principal}
+        </if>
+    </select>
+
+    <select id="isAccepted" resultType="AesbSystemInterfaceDemand">
+        SELECT
+            ACCEPT_TIME as "acceptTime",
+            COUNT(1)  AS "workDay"
+        FROM
+            AESB_SYSTEM_INTERFACE_DEMAND
+        WHERE
+            DEMAND_ID = #{demandId} AND IS_ACCEPT = 1
+        GROUP BY ACCEPT_TIME
+    </select>
+
+    <select id="isNotAccepted" resultType="AesbSystemInterfaceDemand">
+        SELECT
+            ACCEPT_TIME as "acceptTime",
+            COUNT(1)  AS "workDay"
+        FROM
+            AESB_SYSTEM_INTERFACE_DEMAND
+        WHERE
+            DEMAND_ID = #{demandId} AND IS_ACCEPT = 0
+        GROUP BY ACCEPT_TIME
+    </select>
+
+    <select id="selectMyTaskList" resultMap="AesbGDemandInfoResult">
+        SELECT g.DEMAND_ID,
+               g.DEMAND_NAME,
+               g.DEMAND_DES,
+               g.PLANT_FINISH_TIME,
+               g.APPLICATION_TIME,
+               g.APPLICATION_USER,
+               g.REGISTRATION_TIME,
+               g.SERVICE_SYSTEM_ID,
+               g.SERVICE_SYSTEM_USER_ID,
+               g.TASK_STATE,
+               g.DEMAND_STATE,
+               g.CHANGE_CONTENT,
+               g.CHANGE_REASON,
+               g.CHANGE_CYCLE,
+               g.DELAY_TIME,
+               g.CLOSE_REASON
+        FROM aesb_g_demand_info g
+        WHERE
+            g.TASK_STATE >= '1'
+        <if test="demandId != null and demandId != ''">
+            and g.DEMAND_ID like concat(concat('%',#{demandId}),'%')
+        </if>
+        <if test="demandName!= null and demandName != ''">
+            and g.DEMAND_NAME like concat(concat('%',#{demandName}),'%')
+        </if>
+        <if test="taskState!= null and taskState != ''">
+            and g.TASK_STATE = #{taskState}
+        </if>
+    </select>
+
+    <update id="updateSystemInterFaceInfo" parameterType="aesbSystemInterfaceDemand">
+        update aesb_system_interface_demand
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="isAccept != null and isAccept != ''">IS_ACCEPT = #{isAccept},</if>
+            <if test="acceptTime != null">ACCEPT_TIME = #{acceptTime},</if>
+            <if test="workDay != null and workDay != ''">WORK_DAY = #{workDay},</if>
+        </trim>
+        where DEMAND_ID = #{demandId} and JK_VERSION_ID = #{jkVersionId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="downSystemInterFaceInfo">
+        update aesb_system_interface_demand
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="isAccept != null and isAccept != ''">IS_ACCEPT = #{isAccept},</if>
+        </trim>
+        where DEMAND_ID = #{demandId}
+    </update>
+
+    <select id="selectDemandAcceptList" resultMap="AesbGDemandInfoResult">
+        SELECT g.DEMAND_ID,
+               g.DEMAND_NAME,
+               g.DEMAND_DES,
+               g.PLANT_FINISH_TIME,
+               g.APPLICATION_TIME,
+               g.APPLICATION_USER,
+               g.REGISTRATION_TIME,
+               g.SERVICE_SYSTEM_ID,
+               g.SERVICE_SYSTEM_USER_ID,
+               g.TASK_STATE,
+               g.DEMAND_STATE,
+               g.CHANGE_CONTENT,
+               g.CHANGE_REASON,
+               g.CHANGE_CYCLE,
+               g.DELAY_TIME,
+               g.CLOSE_REASON,
+               g.IS_ACCEPT,
+               g.ACCEPT_CONTENT
+        FROM aesb_g_demand_info g
+        WHERE
+              g.TASK_STATE >= '2'
+            <if test="demandId != null and demandId != ''">
+                and g.DEMAND_ID like concat(concat('%',#{demandId}),'%')
+            </if>
+            <if test="demandName!= null and demandName != ''">
+                and g.DEMAND_NAME like concat(concat('%',#{demandName}),'%')
+            </if>
+            <if test="applyUserName!= null and applyUserName != ''">
+                and g.APPLICATION_USER like concat(concat('%',#{applyUserName}),'%')
+            </if>
+
+            <if test="taskState!= null and taskState != ''">
+                and g.TASK_STATE = #{taskState}
+            </if>
+    </select>
+
+    <select id="getMaxWorkDay" resultType="String">
+        SELECT max(WORK_DAY) as "workDay" FROM aesb_system_interface_demand
+        WHERE
+        <if test="demandId != null and demandId != ''">
+            DEMAND_ID = #{demandId}
+        </if>
+        <if test="principal != null and principal != ''">
+            AND PRINCIPAL = #{principal}
+        </if>
+    </select>
+
+    <select id="selectFaceDemandListByPrincipal" resultMap="AesbGDemandInfoResult">
+        SELECT
+            *
+        FROM
+            AESB_G_DEMAND_INFO
+        WHERE
+                DEMAND_ID IN (
+                SELECT DISTINCT
+                    DEMAND_ID
+                FROM
+                    AESB_SYSTEM_INTERFACE_DEMAND
+                WHERE
+                    PRINCIPAL = #{username})
+    </select>
+</mapper>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.sysinter.mapper.AesbGSysInterfaceInfoMapper">
+    
+    <resultMap type="AesbGSysInterfaceInfo" id="AesbGSysInterfaceInfoResult">
+        <result property="jkId"    column="JK_ID"    />
+        <result property="jkVersionId"    column="JK_VERSION_ID"    />
+        <result property="jkVersionName"    column="JK_VERSION_NAME"    />
+        <result property="tradeCode"    column="TRADE_CODE"    />
+        <result property="jkNameEn"    column="JK_NAME_EN"    />
+        <result property="jkNameCn"    column="JK_NAME_CN"    />
+        <result property="jkDesc"    column="JK_DESC"    />
+        <result property="jkType"    column="JK_TYPE"    />
+        <result property="systemId"    column="SYSTEM_ID"    />
+        <result property="isfit"    column="ISFIT"    />
+        <result property="msgType"    column="MSG_TYPE"    />
+        <result property="isContainshead"    column="IS_CONTAINSHEAD"    />
+        <result property="headLength"    column="HEAD_LENGTH"    />
+        <result property="deliverState"    column="DELIVER_STATE"    />
+        <result property="state"    column="STATE"    />
+        <result property="modReason"    column="MOD_REASON"    />
+        <result property="modContent"    column="MOD_CONTENT"    />
+        <result property="lastModTime"    column="LAST_MOD_TIME"    />
+        <result property="projectCode"    column="PROJECT_CODE"    />
+        <result property="protocol"    column="PROTOCOL"    />
+        <result property="invokeDesc"    column="INVOKE_DESC"    />
+        <result property="sysName" column="SYS_NAME" />
+    </resultMap>
+
+    <sql id="selectAesbGSysInterfaceInfoVo">
+        select JK_ID, JK_VERSION_ID, JK_VERSION_NAME, TRADE_CODE, JK_NAME_EN, JK_NAME_CN, JK_DESC, JK_TYPE, SYSTEM_ID, ISFIT, MSG_TYPE, IS_CONTAINSHEAD, HEAD_LENGTH, DELIVER_STATE, STATE, MOD_REASON, MOD_CONTENT, LAST_MOD_TIME, PROJECT_CODE, PROTOCOL, INVOKE_DESC from aesb_g_sys_interface_info
+    </sql>
+
+    <select id="selectAesbGSysInterfaceInfoList" parameterType="AesbGSysInterfaceInfo" resultMap="AesbGSysInterfaceInfoResult">
+        SELECT
+        "o".SYS_NAME,
+        "g".JK_ID,
+        "g".JK_VERSION_ID,
+        "g".JK_VERSION_NAME,
+        "g".TRADE_CODE,
+        "g".JK_NAME_EN,
+        "g".JK_NAME_CN,
+        "g".JK_DESC,
+        "g".JK_TYPE,
+        "g".SYSTEM_ID,
+        "g".ISFIT,
+        "g".MSG_TYPE,
+        "g".IS_CONTAINSHEAD,
+        "g".HEAD_LENGTH,
+        "g".DELIVER_STATE,
+        "g".STATE,
+        "g".MOD_REASON,
+        "g".MOD_CONTENT,
+        "g".LAST_MOD_TIME,
+        "g".PROJECT_CODE,
+        "g".PROTOCOL,
+        "g".INVOKE_DESC
+        FROM
+        aesb_g_sys_interface_info "g"
+        LEFT JOIN opr_system "o" ON "g".SYSTEM_ID="o".SYS_ID
+        <where>  
+            <if test="jkNameCn != null  and jkNameCn != ''"> and "g".JK_NAME_CN like concat('%', #{jkNameCn}, '%')</if>
+            <if test="systemId != null  and systemId != ''"> and "g".SYSTEM_ID = #{systemId}</if>
+        </where>
+    </select>
+    
+    <select id="selectAesbGSysInterfaceInfoById" parameterType="String" resultMap="AesbGSysInterfaceInfoResult">
+        <include refid="selectAesbGSysInterfaceInfoVo"/>
+        where JK_VERSION_ID = #{jkVersionId}
+    </select>
+        
+    <insert id="insertAesbGSysInterfaceInfo" parameterType="AesbGSysInterfaceInfo">
+        insert into aesb_g_sys_interface_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jkId != null and jkId != ''">JK_ID,</if>
+            <if test="jkVersionId != null">JK_VERSION_ID,</if>
+            <if test="jkVersionName != null and jkVersionName != ''">JK_VERSION_NAME,</if>
+            <if test="tradeCode != null and tradeCode != ''">TRADE_CODE,</if>
+            <if test="jkNameEn != null">JK_NAME_EN,</if>
+            <if test="jkNameCn != null and jkNameCn != ''">JK_NAME_CN,</if>
+            <if test="jkDesc != null and jkDesc != ''">JK_DESC,</if>
+            <if test="jkType != null and jkType != ''">JK_TYPE,</if>
+            <if test="systemId != null and systemId != ''">SYSTEM_ID,</if>
+            <if test="isfit != null and isfit != ''">ISFIT,</if>
+            <if test="msgType != null">MSG_TYPE,</if>
+            <if test="isContainshead != null">IS_CONTAINSHEAD,</if>
+            <if test="headLength != null">HEAD_LENGTH,</if>
+            <if test="deliverState != null and deliverState != ''">DELIVER_STATE,</if>
+            <if test="state != null and state != ''">STATE,</if>
+            <if test="modReason != null">MOD_REASON,</if>
+            <if test="modContent != null">MOD_CONTENT,</if>
+            <if test="lastModTime != null">LAST_MOD_TIME,</if>
+            <if test="projectCode != null">PROJECT_CODE,</if>
+            <if test="protocol != null">PROTOCOL,</if>
+            <if test="invokeDesc != null">INVOKE_DESC,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jkId != null and jkId != ''">#{jkId},</if>
+            <if test="jkVersionId != null">#{jkVersionId},</if>
+            <if test="jkVersionName != null and jkVersionName != ''">#{jkVersionName},</if>
+            <if test="tradeCode != null and tradeCode != ''">#{tradeCode},</if>
+            <if test="jkNameEn != null">#{jkNameEn},</if>
+            <if test="jkNameCn != null and jkNameCn != ''">#{jkNameCn},</if>
+            <if test="jkDesc != null and jkDesc != ''">#{jkDesc},</if>
+            <if test="jkType != null and jkType != ''">#{jkType},</if>
+            <if test="systemId != null and systemId != ''">#{systemId},</if>
+            <if test="isfit != null and isfit != ''">#{isfit},</if>
+            <if test="msgType != null">#{msgType},</if>
+            <if test="isContainshead != null">#{isContainshead},</if>
+            <if test="headLength != null">#{headLength},</if>
+            <if test="deliverState != null and deliverState != ''">#{deliverState},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="modReason != null">#{modReason},</if>
+            <if test="modContent != null">#{modContent},</if>
+            <if test="lastModTime != null">#{lastModTime},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="protocol != null">#{protocol},</if>
+            <if test="invokeDesc != null">#{invokeDesc},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAesbGSysInterfaceInfo" parameterType="AesbGSysInterfaceInfo">
+        update aesb_g_sys_interface_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jkId != null and jkId != ''">JK_ID = #{jkId},</if>
+            <if test="jkVersionName != null and jkVersionName != ''">JK_VERSION_NAME = #{jkVersionName},</if>
+            <if test="tradeCode != null and tradeCode != ''">TRADE_CODE = #{tradeCode},</if>
+            <if test="jkNameEn != null">JK_NAME_EN = #{jkNameEn},</if>
+            <if test="jkNameCn != null and jkNameCn != ''">JK_NAME_CN = #{jkNameCn},</if>
+            <if test="jkDesc != null and jkDesc != ''">JK_DESC = #{jkDesc},</if>
+            <if test="jkType != null and jkType != ''">JK_TYPE = #{jkType},</if>
+            <if test="systemId != null and systemId != ''">SYSTEM_ID = #{systemId},</if>
+            <if test="isfit != null and isfit != ''">ISFIT = #{isfit},</if>
+            <if test="msgType != null">MSG_TYPE = #{msgType},</if>
+            <if test="isContainshead != null">IS_CONTAINSHEAD = #{isContainshead},</if>
+            <if test="headLength != null">HEAD_LENGTH = #{headLength},</if>
+            <if test="deliverState != null and deliverState != ''">DELIVER_STATE = #{deliverState},</if>
+            <if test="state != null and state != ''">STATE = #{state},</if>
+            <if test="modReason != null">MOD_REASON = #{modReason},</if>
+            <if test="modContent != null">MOD_CONTENT = #{modContent},</if>
+            <if test="lastModTime != null">LAST_MOD_TIME = #{lastModTime},</if>
+            <if test="projectCode != null">PROJECT_CODE = #{projectCode},</if>
+            <if test="protocol != null">PROTOCOL = #{protocol},</if>
+            <if test="invokeDesc != null">INVOKE_DESC = #{invokeDesc},</if>
+        </trim>
+        where JK_VERSION_ID = #{jkVersionId}
+    </update>
+
+    <delete id="deleteAesbGSysInterfaceInfoById" parameterType="String">
+        delete from aesb_g_sys_interface_info where JK_VERSION_ID = #{jkVersionId}
+    </delete>
+
+    <delete id="deleteAesbGSysInterfaceInfoByIds" parameterType="String">
+        delete from aesb_g_sys_interface_info where JK_VERSION_ID in 
+        <foreach item="jkVersionId" collection="array" open="(" separator="," close=")">
+            #{jkVersionId}
+        </foreach>
+    </delete>
+
+
+    <select id="queryIFaceListBySysId" resultType="aesbGSysInterfaceInfo">
+        SELECT
+            "f".JK_VERSION_ID AS "jkVersionId",
+            "f".JK_NAME_CN AS "jkNameCn",
+            "f".JK_NAME_EN AS "jkNameEn",
+            "f".SYSTEM_ID AS "systemId",
+            "os".SYS_NAME as "sysName",
+            "su".user_name as "principal"
+        FROM
+            aesb_g_sys_interface_info "f"
+                left join opr_system "os" on "f".SYSTEM_ID="os".SYS_ID
+                left join sys_user "su" on "os".MANAGER_ID=su.user_id
+        WHERE
+            "f".SYSTEM_ID = #{systemId}
+    </select>
+    
+</mapper>

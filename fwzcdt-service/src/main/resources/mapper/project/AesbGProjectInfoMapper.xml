@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.project.mapper.AesbGProjectInfoMapper">
+    
+    <resultMap type="AesbGProjectInfo" id="AesbGProjectInfoResult">
+        <result property="projectCode"    column="PROJECT_CODE"    />
+        <result property="projectName"    column="PROJECT_NAME"    />
+        <result property="projectType"    column="PROJECT_TYPE"    />
+        <result property="projectDesc"    column="PROJECT_DESC"    />
+        <result property="principal"    column="PRINCIPAL"    />
+        <result property="planDevDate"    column="PLAN_DEV_DATE"    />
+        <result property="planSitDate"    column="PLAN_SIT_DATE"    />
+        <result property="planUatDate"    column="PLAN_UAT_DATE"    />
+        <result property="planTrlDate"    column="PLAN_TRL_DATE"    />
+        <result property="planPrdDate"    column="PLAN_PRD_DATE"    />
+        <result property="prdFlag"    column="PRD_FLAG"    />
+        <result property="availState"    column="AVAIL_STATE"    />
+        <result property="crtTime"    column="CRT_TIME"    />
+        <result property="attachmentName"    column="ATTACHMENT_NAME"    />
+    </resultMap>
+
+    <sql id="selectAesbGProjectInfoVo">
+        select PROJECT_CODE, PROJECT_NAME, PROJECT_TYPE, PROJECT_DESC, PRINCIPAL, PLAN_DEV_DATE, PLAN_SIT_DATE, PLAN_UAT_DATE, PLAN_TRL_DATE, PLAN_PRD_DATE, PRD_FLAG, AVAIL_STATE, CRT_TIME, ATTACHMENT_NAME from aesb_g_project_info
+    </sql>
+
+    <select id="selectAesbGProjectInfoList" parameterType="AesbGProjectInfo" resultMap="AesbGProjectInfoResult">
+        <include refid="selectAesbGProjectInfoVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and PROJECT_NAME like concat('%', #{projectName}, '%')</if>
+            <if test="projectType != null  and projectType != ''"> and PROJECT_TYPE = #{projectType}</if>
+            <if test="projectDesc != null  and projectDesc != ''"> and PROJECT_DESC = #{projectDesc}</if>
+            <if test="principal != null  and principal != ''"> and PRINCIPAL = #{principal}</if>
+            <if test="planDevDate != null  and planDevDate != ''"> and PLAN_DEV_DATE = #{planDevDate}</if>
+            <if test="planSitDate != null  and planSitDate != ''"> and PLAN_SIT_DATE = #{planSitDate}</if>
+            <if test="planUatDate != null  and planUatDate != ''"> and PLAN_UAT_DATE = #{planUatDate}</if>
+            <if test="planTrlDate != null  and planTrlDate != ''"> and PLAN_TRL_DATE = #{planTrlDate}</if>
+            <if test="planPrdDate != null  and planPrdDate != ''"> and PLAN_PRD_DATE = #{planPrdDate}</if>
+            <if test="prdFlag != null  and prdFlag != ''"> and PRD_FLAG = #{prdFlag}</if>
+            <if test="availState != null  and availState != ''"> and AVAIL_STATE = #{availState}</if>
+            <if test="crtTime != null "> and CRT_TIME = #{crtTime}</if>
+            <if test="attachmentName != null  and attachmentName != ''"> and ATTACHMENT_NAME like concat('%', #{attachmentName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectAesbGProjectInfoById" parameterType="String" resultMap="AesbGProjectInfoResult">
+        <include refid="selectAesbGProjectInfoVo"/>
+        where PROJECT_CODE = #{projectCode}
+    </select>
+        
+    <insert id="insertAesbGProjectInfo" parameterType="AesbGProjectInfo">
+        insert into aesb_g_project_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectCode != null">PROJECT_CODE,</if>
+            <if test="projectName != null and projectName != ''">PROJECT_NAME,</if>
+            <if test="projectType != null and projectType != ''">PROJECT_TYPE,</if>
+            <if test="projectDesc != null">PROJECT_DESC,</if>
+            <if test="principal != null and principal != ''">PRINCIPAL,</if>
+            <if test="planDevDate != null and planDevDate != ''">PLAN_DEV_DATE,</if>
+            <if test="planSitDate != null and planSitDate != ''">PLAN_SIT_DATE,</if>
+            <if test="planUatDate != null and planUatDate != ''">PLAN_UAT_DATE,</if>
+            <if test="planTrlDate != null">PLAN_TRL_DATE,</if>
+            <if test="planPrdDate != null and planPrdDate != ''">PLAN_PRD_DATE,</if>
+            <if test="prdFlag != null and prdFlag != ''">PRD_FLAG,</if>
+            <if test="availState != null and availState != ''">AVAIL_STATE,</if>
+            <if test="crtTime != null">CRT_TIME,</if>
+            <if test="attachmentName != null">ATTACHMENT_NAME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="projectType != null and projectType != ''">#{projectType},</if>
+            <if test="projectDesc != null">#{projectDesc},</if>
+            <if test="principal != null and principal != ''">#{principal},</if>
+            <if test="planDevDate != null and planDevDate != ''">#{planDevDate},</if>
+            <if test="planSitDate != null and planSitDate != ''">#{planSitDate},</if>
+            <if test="planUatDate != null and planUatDate != ''">#{planUatDate},</if>
+            <if test="planTrlDate != null">#{planTrlDate},</if>
+            <if test="planPrdDate != null and planPrdDate != ''">#{planPrdDate},</if>
+            <if test="prdFlag != null and prdFlag != ''">#{prdFlag},</if>
+            <if test="availState != null and availState != ''">#{availState},</if>
+            <if test="crtTime != null">#{crtTime},</if>
+            <if test="attachmentName != null">#{attachmentName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAesbGProjectInfo" parameterType="AesbGProjectInfo">
+        update aesb_g_project_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">PROJECT_NAME = #{projectName},</if>
+            <if test="projectType != null and projectType != ''">PROJECT_TYPE = #{projectType},</if>
+            <if test="projectDesc != null">PROJECT_DESC = #{projectDesc},</if>
+            <if test="principal != null and principal != ''">PRINCIPAL = #{principal},</if>
+            <if test="planDevDate != null and planDevDate != ''">PLAN_DEV_DATE = #{planDevDate},</if>
+            <if test="planSitDate != null and planSitDate != ''">PLAN_SIT_DATE = #{planSitDate},</if>
+            <if test="planUatDate != null and planUatDate != ''">PLAN_UAT_DATE = #{planUatDate},</if>
+            <if test="planTrlDate != null">PLAN_TRL_DATE = #{planTrlDate},</if>
+            <if test="planPrdDate != null and planPrdDate != ''">PLAN_PRD_DATE = #{planPrdDate},</if>
+            <if test="prdFlag != null and prdFlag != ''">PRD_FLAG = #{prdFlag},</if>
+            <if test="availState != null and availState != ''">AVAIL_STATE = #{availState},</if>
+            <if test="crtTime != null">CRT_TIME = #{crtTime},</if>
+            <if test="attachmentName != null">ATTACHMENT_NAME = #{attachmentName},</if>
+        </trim>
+        where PROJECT_CODE = #{projectCode}
+    </update>
+
+    <delete id="deleteAesbGProjectInfoById" parameterType="String">
+        delete from aesb_g_project_info where PROJECT_CODE = #{projectCode}
+    </delete>
+
+    <delete id="deleteAesbGProjectInfoByIds" parameterType="String">
+        delete from aesb_g_project_info where PROJECT_CODE in 
+        <foreach item="projectCode" collection="array" open="(" separator="," close=")">
+            #{projectCode}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.fwlb.mapper.AesbGServiceSceneMappingMapper">
+    
+    <resultMap type="AesbGServiceSceneMapping" id="AesbGServiceSceneMappingResult">
+        <result property="mappingGroupId"    column="MAPPING_GROUP_ID"    />
+        <result property="mappingId"    column="MAPPING_ID"    />
+        <result property="mappingVersionId"    column="MAPPING_VERSION_ID"    />
+        <result property="mappingType"    column="MAPPING_TYPE"    />
+        <result property="reqSysId"    column="REQ_SYS_ID"    />
+        <result property="reqFunctionName"    column="REQ_FUNCTION_NAME"    />
+        <result property="reqTradeCode"    column="REQ_TRADE_CODE"    />
+        <result property="sceneId"    column="SCENE_ID"    />
+        <result property="serviceId"    column="SERVICE_ID"    />
+        <result property="proSysId"    column="PRO_SYS_ID"    />
+        <result property="proTradeCode"    column="PRO_TRADE_CODE"    />
+        <result property="timeOut"    column="TIME_OUT"    />
+        <result property="projectCode"    column="PROJECT_CODE"    />
+        <result property="state"    column="STATE"    />
+        <result property="crtUserId"    column="CRT_USER_ID"    />
+        <result property="crtTime"    column="CRT_TIME"    />
+        <result property="businessCode"    column="BUSINESS_CODE"    />
+        <result property="businessName"    column="BUSINESS_NAME"    />
+        <result property="fieldCheck"    column="FIELD_CHECK"    />
+        <result property="dataResource"    column="DATA_RESOURCE"    />
+    </resultMap>
+
+    <sql id="selectAesbGServiceSceneMappingVo">
+        select MAPPING_GROUP_ID, MAPPING_ID, MAPPING_VERSION_ID, MAPPING_TYPE, REQ_SYS_ID, REQ_FUNCTION_NAME, REQ_TRADE_CODE, SCENE_ID, SERVICE_ID, PRO_SYS_ID, PRO_TRADE_CODE, TIME_OUT, PROJECT_CODE, STATE, CRT_USER_ID, CRT_TIME, BUSINESS_CODE, BUSINESS_NAME, FIELD_CHECK, DATA_RESOURCE from aesb_g_service_scene_mapping
+    </sql>
+
+    <select id="selectAesbGServiceSceneMappingList" parameterType="AesbGServiceSceneMapping" resultType="AesbGServiceSceneMapping">
+        SELECT
+        "m".MAPPING_ID as "mappingId",
+        "m".MAPPING_VERSION_ID as "mappingVersionId",
+        "m".MAPPING_TYPE as "mappingType",
+        "m".REQ_SYS_ID as "reqSysId",
+        "t".SYS_NAME as "reqSysName",
+        "m".SERVICE_ID as "serviceId",
+        "m".PRO_SYS_ID as "proSysId",
+        "s".SYS_NAME as "proSysName",
+        "m".TIME_OUT as "timeOut",
+        "m".PROJECT_CODE as "projectCode",
+        "p".PROJECT_NAME as "projectName",
+        "m".STATE as "state",
+        "m".CRT_TIME as "crtTime",
+        "m".BUSINESS_CODE as "businessCode",
+        "m".BUSINESS_NAME as "businessName",
+        "sv".SVC_NAME as "svcName",
+        "sv".SVC_CODE as "svcCode",
+        "v".SV_NAME as "svName",
+        "v".SV_INTERFACE as "svInterface",
+        "v".SV_CODE as "svCode",
+        "v".SV_INTEGRATION_MODE as "svIntegrationMode"
+        FROM
+        aesb_g_service_scene_mapping "m"
+        LEFT JOIN aesb_g_project_info "p" ON "m".PROJECT_CODE="p".PROJECT_CODE
+        LEFT JOIN opr_system "s" ON "s".SYS_ID="m".PRO_SYS_ID
+        LEFT JOIN opr_system "t" ON "t".SYS_ID="m".REQ_SYS_ID
+        LEFT JOIN opr_service "sv" ON "m".SERVICE_ID="sv".SVC_ID
+        LEFT JOIN opr_scenario_version "v" ON "v".SV_ID="m".MAPPING_VERSION_ID
+        <where>
+            <if test="mappingId != null  and mappingId != ''"> and "m".MAPPING_ID = #{mappingId}</if>
+            <if test="reqSysId != null  and reqSysId != ''"> and "m".REQ_SYS_ID = #{reqSysId}</if>
+            <if test="serviceId != null  and serviceId != ''"> and "m".SERVICE_ID = #{serviceId}</if>
+            <if test="proSysId != null  and proSysId != ''"> and "m".PRO_SYS_ID = #{proSysId}</if>
+            <if test="svInterface != null  and svInterface != ''"> and "v".SV_INTERFACE = #{svInterface}</if>
+            <if test="state != null  and state != ''"> and "m".STATE = #{state}</if>
+        </where>
+    </select>
+    
+    <select id="selectAesbGServiceSceneMappingById" parameterType="String" resultMap="AesbGServiceSceneMappingResult">
+        <include refid="selectAesbGServiceSceneMappingVo"/>
+        where MAPPING_ID = #{mappingId}
+    </select>
+        
+    <insert id="insertAesbGServiceSceneMapping" parameterType="AesbGServiceSceneMapping">
+        insert into aesb_g_service_scene_mapping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mappingGroupId != null and mappingGroupId != ''">MAPPING_GROUP_ID,</if>
+            <if test="mappingId != null">MAPPING_ID,</if>
+            <if test="mappingVersionId != null and mappingVersionId != ''">MAPPING_VERSION_ID,</if>
+            <if test="mappingType != null and mappingType != ''">MAPPING_TYPE,</if>
+            <if test="reqSysId != null and reqSysId != ''">REQ_SYS_ID,</if>
+            <if test="reqFunctionName != null">REQ_FUNCTION_NAME,</if>
+            <if test="reqTradeCode != null">REQ_TRADE_CODE,</if>
+            <if test="sceneId != null">SCENE_ID,</if>
+            <if test="serviceId != null">SERVICE_ID,</if>
+            <if test="proSysId != null and proSysId != ''">PRO_SYS_ID,</if>
+            <if test="proTradeCode != null and proTradeCode != ''">PRO_TRADE_CODE,</if>
+            <if test="timeOut != null">TIME_OUT,</if>
+            <if test="projectCode != null and projectCode != ''">PROJECT_CODE,</if>
+            <if test="state != null and state != ''">STATE,</if>
+            <if test="crtUserId != null and crtUserId != ''">CRT_USER_ID,</if>
+            <if test="crtTime != null">CRT_TIME,</if>
+            <if test="businessCode != null">BUSINESS_CODE,</if>
+            <if test="businessName != null">BUSINESS_NAME,</if>
+            <if test="fieldCheck != null">FIELD_CHECK,</if>
+            <if test="dataResource != null">DATA_RESOURCE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mappingGroupId != null and mappingGroupId != ''">#{mappingGroupId},</if>
+            <if test="mappingId != null">#{mappingId},</if>
+            <if test="mappingVersionId != null and mappingVersionId != ''">#{mappingVersionId},</if>
+            <if test="mappingType != null and mappingType != ''">#{mappingType},</if>
+            <if test="reqSysId != null and reqSysId != ''">#{reqSysId},</if>
+            <if test="reqFunctionName != null">#{reqFunctionName},</if>
+            <if test="reqTradeCode != null">#{reqTradeCode},</if>
+            <if test="sceneId != null">#{sceneId},</if>
+            <if test="serviceId != null">#{serviceId},</if>
+            <if test="proSysId != null and proSysId != ''">#{proSysId},</if>
+            <if test="proTradeCode != null and proTradeCode != ''">#{proTradeCode},</if>
+            <if test="timeOut != null">#{timeOut},</if>
+            <if test="projectCode != null and projectCode != ''">#{projectCode},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="crtUserId != null and crtUserId != ''">#{crtUserId},</if>
+            <if test="crtTime != null">#{crtTime},</if>
+            <if test="businessCode != null">#{businessCode},</if>
+            <if test="businessName != null">#{businessName},</if>
+            <if test="fieldCheck != null">#{fieldCheck},</if>
+            <if test="dataResource != null">#{dataResource},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAesbGServiceSceneMapping" parameterType="AesbGServiceSceneMapping">
+        update aesb_g_service_scene_mapping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mappingGroupId != null and mappingGroupId != ''">MAPPING_GROUP_ID = #{mappingGroupId},</if>
+            <if test="mappingVersionId != null and mappingVersionId != ''">MAPPING_VERSION_ID = #{mappingVersionId},</if>
+            <if test="mappingType != null and mappingType != ''">MAPPING_TYPE = #{mappingType},</if>
+            <if test="reqSysId != null and reqSysId != ''">REQ_SYS_ID = #{reqSysId},</if>
+            <if test="reqFunctionName != null">REQ_FUNCTION_NAME = #{reqFunctionName},</if>
+            <if test="reqTradeCode != null">REQ_TRADE_CODE = #{reqTradeCode},</if>
+            <if test="sceneId != null">SCENE_ID = #{sceneId},</if>
+            <if test="serviceId != null">SERVICE_ID = #{serviceId},</if>
+            <if test="proSysId != null and proSysId != ''">PRO_SYS_ID = #{proSysId},</if>
+            <if test="proTradeCode != null and proTradeCode != ''">PRO_TRADE_CODE = #{proTradeCode},</if>
+            <if test="timeOut != null">TIME_OUT = #{timeOut},</if>
+            <if test="projectCode != null and projectCode != ''">PROJECT_CODE = #{projectCode},</if>
+            <if test="state != null and state != ''">STATE = #{state},</if>
+            <if test="crtUserId != null and crtUserId != ''">CRT_USER_ID = #{crtUserId},</if>
+            <if test="crtTime != null">CRT_TIME = #{crtTime},</if>
+            <if test="businessCode != null">BUSINESS_CODE = #{businessCode},</if>
+            <if test="businessName != null">BUSINESS_NAME = #{businessName},</if>
+            <if test="fieldCheck != null">FIELD_CHECK = #{fieldCheck},</if>
+            <if test="dataResource != null">DATA_RESOURCE = #{dataResource},</if>
+        </trim>
+        where MAPPING_ID = #{mappingId}
+    </update>
+
+    <delete id="deleteAesbGServiceSceneMappingById" parameterType="String">
+        delete from aesb_g_service_scene_mapping where MAPPING_ID = #{mappingId}
+    </delete>
+
+    <delete id="deleteAesbGServiceSceneMappingByIds" parameterType="String">
+        delete from aesb_g_service_scene_mapping where MAPPING_ID in 
+        <foreach item="mappingId" collection="array" open="(" separator="," close=")">
+            #{mappingId}
+        </foreach>
+    </delete>
+
+
+    <select id="sceneRatio" parameterType="String" resultType="java.util.Map">
+        SELECT
+            "m".MAPPING_ID as "mappingId",
+            "m".MAPPING_VERSION_ID AS "svId",
+            "m".REQ_SYS_ID AS "reqSysId",
+            "m".PRO_SYS_ID AS "proSysId",
+            "m".SERVICE_ID AS "serviceId",
+            "s".SYS_NAME AS "reqSysName",
+            "t".SYS_NAME AS "proSysName"
+        FROM
+            aesb_g_service_scene_mapping "m"
+                LEFT JOIN opr_system "s" ON "m".REQ_SYS_ID = "s".SYS_ID
+                LEFT JOIN opr_system "t" ON "m".PRO_SYS_ID = "t".SYS_ID
+            WHERE "m".MAPPING_TYPE=1 and "m".PRO_SYS_ID = #{proSysId}
+    </select>
+
+</mapper>

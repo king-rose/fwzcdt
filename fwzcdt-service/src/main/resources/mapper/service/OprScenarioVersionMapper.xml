@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.agree.web.fwlb.mapper.OprScenarioVersionMapper">
+
+	<resultMap type = "OprScenarioVersion" id = "OprScenarioVersionResult">
+		<id property = "svId" column = "SV_ID"/>
+		<result property = "svScnId" column = "SV_SCN_ID"/>
+		<result property = "svNo" column = "SV_NO"/>
+		<result property = "svType" column = "SV_TYPE"/>
+		<result property = "svCode" column = "SV_CODE"/>
+		<result property = "svName" column = "SV_NAME"/>
+		<result property = "scnDes" column = "SCN_DES"/>
+		<result property = "svInterface" column = "SV_INTERFACE"/>
+		<result property = "scnSysId" column = "SCN_SYS_ID"/>
+		<result property = "responseFlag" column = "RESPONSE_FLAG"/>
+		<result property = "timeOut" column = "TIME_OUT"/>
+		<result property = "headCode" column = "HEAD_CODE"/>
+		<result property = "updateReason" column = "UPDATE_REASON"/>
+		<result property = "updateContent" column = "UPDATE_CONTENT"/>
+		<result property = "serviceId" column = "SERVICE_ID"/>
+		<result property = "svSvId" column = "SV_SV_ID"/>
+		<result property = "projectCode" column = "PROJECT_CODE"/>
+		<result property = "applicationId" column = "APPLICATION_ID"/>
+		<result property = "svGrpId" column = "SV_GRP_ID"/>
+		<result property = "xmlValidFlag" column = "XML_VALID_FLAG"/>
+		<result property = "stdFieldCheck" column = "STD_FIELD_CHECK"/>
+		<result property = "jkAdapFlag" column = "JK_ADAP_FLAG"/>
+		<result property = "jkAdapType" column = "JK_ADAP_TYPE"/>
+		<result property = "lockType" column = "LOCK_TYPE"/>
+		<result property = "auditState" column = "AUDIT_STATE"/>
+		<result property = "svStatus" column = "SV_STATUS"/>
+		<result property = "svCreateTime" column = "SV_CREATE_TIME"/>
+		<result property = "svCreateUser" column = "SV_CREATE_USER"/>
+		<result property = "svUpdateTime" column = "SV_UPDATE_TIME"/>
+		<result property = "svUpdateUser" column = "SV_UPDATE_USER"/>
+		<result property = "jkVersionId" column = "JK_VERSION_ID"/>
+		<result property = "serviceVersionId" column = "SERVICE_VERSION_ID"/>
+		<result property = "appGlobetradecode" column = "APP_GLOBETRADECODE"/>
+		<result property = "multiVersion" column = "MULTI_VERSION"/>
+		<result property = "svMessageFormat" column = "SV_MESSAGE_FORMAT"/>
+		<result property = "svCommunicationProtocol" column = "SV_COMMUNICATION_PROTOCOL"/>
+		<result property = "svHttpUrl" column = "SV_HTTP_URL"/>
+		<result property = "svExternalInterfaceCode" column = "SV_EXTERNAL_INTERFACE_CODE"/>
+		<result property = "bypassOutputSys" column = "BYPASS_OUTPUT_SYS"/>
+		<result property = "svIntegrationMode" column = "SV_INTEGRATION_MODE"/>
+		<result property = "sysName" column = "SYS_NAME"/>
+		<result property = "svcCode" column = "SVC_CODE"/>
+		<result property = "svcName" column = "SVC_NAME"/>
+		<result property = "instanceId" column = "INSTANCE_ID"/>
+		<result property = "processKey" column = "PROCESS_KEY"/>
+		<result property = "applyUserId" column = "APPLY_USER_ID"/>
+		<result property = "applyUserName" column = "APPLY_USER_NAME"/>
+		<result property = "applyTime" column = "APPLY_TIME"/>
+		<result typeHandler="com.agree.handler.Blob2StringTypeHandler" column="sql_script" property="sqlScript" javaType="string" jdbcType="BLOB"/>
+	</resultMap>
+
+	<resultMap type = "oprScenarioField" id = "oprScenarioFieldResult">
+		<result property = "sfId" column = "SF_ID"/>
+		<result property = "sfSvId" column = "SF_SV_ID"/>
+		<result property = "scnCode" column = "SCN_CODE"/>
+		<result property = "sfCount" column = "SF_COUNT"/>
+		<result property = "sfEnName" column = "SF_EN_NAME"/>
+		<result property = "sfCnName" column = "SF_CN_NAME"/>
+		<result property = "sfType" column = "SF_TYPE"/>
+		<result property = "sfDataType" column = "SF_DATA_TYPE"/>
+		<result property = "sfLength" column = "SF_LENGTH"/>
+		<result property = "sfFraction" column = "SF_FRACTION"/>
+		<result property = "sfIsEnssential" column = "SF_IS_ENSSENTIAL"/>
+		<result property = "sfCycleTimes" column = "SF_CYCLE_TIMES"/>
+		<result property = "sfFormat" column = "SF_FORMAT"/>
+		<result typeHandler="com.agree.handler.Blob2StringTypeHandler" column="SF_ENUM" property="sfEnum" javaType="string" jdbcType="BLOB"/>
+		<result typeHandler="com.agree.handler.Blob2StringTypeHandler" column="SF_DES" property="sfDes" javaType="string" jdbcType="BLOB"/>
+		<result property = "sfDefault" column = "SF_DEFAULT"/>
+		<result property = "sfIsSensitive" column = "SF_IS_SENSITIVE"/>
+		<result property = "sfPath" column = "SF_PATH"/>
+		<result property = "sfQuoteName" column = "SF_QUOTE_NAME"/>
+		<result property = "sfQuoteNamespace" column = "SF_QUOTE_NAMESPACE"/>
+		<result property = "sfQuoteFileName" column = "SF_QUOTE_FILE_NAME"/>
+		<result property = "sfQuoteFileNameEn" column = "SF_QUOTE_FILE_NAME_EN"/>
+		<result property = "sfQuoteFieldNameEn" column = "SF_QUOTE_FIELD_NAME_EN"/>
+		<result property = "sfLengthType" column = "SF_LENGTH_TYPE"/>
+		<result property = "sfIsStdCheck" column = "SF_IS_STD_CHECK"/>
+		<result property = "sfStdCode" column = "SF_STD_CODE"/>
+		<result property = "sfHttpParamType" column = "SF_HTTP_PARAM_TYPE"/>
+		<result property = "sfExample" column = "SF_EXAMPLE"/>
+		<result property = "sfEncryptMode" column = "SF_ENCRYPT_MODE"/>
+		<result property = "sfStdNameCn" column = "SF_STD_NAME_CN"/>
+		<result property = "sfDataSource" column = "SF_DATA_SOURCE"/>
+	</resultMap>
+
+
+
+	<sql id = "oprScenarioVersionInfo">
+		SELECT
+	"ov".SVC_CODE,
+	concat(
+		"os".SYS_CODE,
+	concat( '-', "os".SYS_NAME )) AS SYS_NAME,
+	"osv".SV_SCN_ID,
+	"osv".SV_ID,
+	"osv".SV_NO,
+	"osv".SV_TYPE,
+	"osv".SV_CODE,
+	"osv".SV_NAME,
+	"ov".SVC_NAME,
+	"osv".SCN_DES,
+	"osv".SV_INTERFACE,
+	"osv".SCN_SYS_ID,
+	"osv".RESPONSE_FLAG,
+	"osv".TIME_OUT,
+	"osv".HEAD_CODE,
+	"osv".UPDATE_REASON,
+	"osv".UPDATE_CONTENT,
+	"osv".SERVICE_ID,
+	"osv".SV_SV_ID,
+	"osv".PROJECT_CODE,
+	"osv".APPLICATION_ID,
+	"osv".SV_GRP_ID,
+	"osv".XML_VALID_FLAG,
+	"osv".STD_FIELD_CHECK,
+	"osv".JK_ADAP_FLAG,
+	"osv".JK_ADAP_TYPE,
+	"osv".LOCK_TYPE,
+	"osv".AUDIT_STATE,
+	"osv".SV_STATUS,
+	"osv".SV_CREATE_TIME,
+	"osv".SV_CREATE_USER,
+	"osv".SV_UPDATE_TIME,
+	"osv".SV_UPDATE_USER,
+	"osv".JK_VERSION_ID,
+	"osv".SERVICE_VERSION_ID,
+	"osv".APP_GLOBETRADECODE,
+	"osv".MULTI_VERSION,
+	"osv".SV_MESSAGE_FORMAT,
+	"osv".SV_COMMUNICATION_PROTOCOL,
+	"osv".SV_HTTP_URL,
+	"osv".SV_EXTERNAL_INTERFACE_CODE,
+	"osv".BYPASS_OUTPUT_SYS,
+	"osv".INSTANCE_ID,
+	"osv".PROCESS_KEY,
+	"osv".APPLY_USER_ID,
+	"osv".APPLY_USER_NAME,
+	"osv".APPLY_TIME,
+	"osv".SV_INTEGRATION_MODE
+FROM
+	opr_scenario_version "osv"
+	LEFT JOIN opr_system "os" ON "osv".SCN_SYS_ID = "os".SYS_ID
+	LEFT JOIN opr_service "ov" ON "ov".SVC_ID = "osv".SERVICE_ID
+	</sql>
+
+	<delete id = "removeScene" parameterType = "String">
+		delete from opr_scenario_version where SV_ID in
+		<foreach collection = "array" item = "svId" open = "(" separator = "," close = ")">
+			#{svId}
+		</foreach>
+	</delete>
+
+	<!--列表查询-->
+	<select id = "selectOsvList" parameterType = "OprScenarioVersion" resultMap = "OprScenarioVersionResult">
+		<include refid = "oprScenarioVersionInfo"></include>
+		<where>
+			1=1
+			<if test = "svName != null and svName != ''">
+				AND "osv".SV_NAME like concat(concat('%', #{svName}), '%')
+			</if>
+			<if test = "scnSysId != null and scnSysId != ''">
+				AND "osv".SCN_SYS_ID = #{scnSysId}
+			</if>
+			<if test = "svStatus != null and svStatus != ''">
+				AND "osv".SV_STATUS = #{svStatus}
+			</if>
+			<if test = "auditState != null and auditState != ''">
+				AND "osv".AUDIT_STATE = #{auditState}
+			</if>
+			<if test = "stdFieldCheck != null and stdFieldCheck !=''">
+				AND "osv".STD_FIELD_CHECK = #{stdFieldCheck}
+			</if>
+			<if test = "jkAdapFlag != null and jkAdapFlag !=''">
+				AND "osv".JK_ADAP_FLAG = #{jkAdapFlag}
+			</if>
+			<if test = "svType != null and svType != ''">
+				AND "osv".SV_TYPE = #{svType}
+			</if>
+			<if test = "xmlValidFlag != null and xmlValidFlag != ''">
+				AND "osv".XML_VALID_FLAG = #{xmlValidFlag}
+			</if>
+			<if test = "serviceId != null and serviceId != ''">
+				AND "osv".SERVICE_ID = #{serviceId}
+			</if>
+			<if test = "startTime != null">
+				AND "osv".SV_UPDATE_TIME &gt;= #{startTime}
+			</if>
+			<if test = "endTime != null">
+				AND "osv".SV_UPDATE_TIME &lt;= #{endTime}
+			</if>
+		</where>
+		order by "osv".SV_UPDATE_TIME desc
+	</select>
+
+	<!--场景基本信息-->
+	<select id = "getBasicByServiceId" resultType = "map" parameterType = "String">
+		SELECT "os".SYS_NAME                    AS "sysName",
+		       "osv".SV_SCN_ID                  AS "svScnId",
+		       "osv".SV_ID                      AS "svId",
+		       "osv".SV_NO                      AS "svNo",
+		       "osv".SV_TYPE                    AS "svType",
+		       "osv".SV_CODE                    AS "svCode",
+		       "osv".SV_NAME                    AS "svName",
+		       "osv".SCN_DES                    AS "scnDes",
+		       "osv".SV_INTERFACE               AS "svInterface",
+		       "osv".SCN_SYS_ID                 AS "scnSysId",
+		       "osv".RESPONSE_FLAG              AS "responseFlag",
+		       "osv".TIME_OUT                   AS "timeOut",
+		       "osv".HEAD_CODE                  AS "headCode",
+		       "osv".UPDATE_REASON              AS "updateReason",
+		       "osv".SERVICE_ID                 AS "serviceId",
+		       "osv".SV_SV_ID                   AS "svSvId",
+		       "osv".PROJECT_CODE               AS "projectCode",
+		       "osv".APPLICATION_ID             AS "applicationId",
+		       "osv".SV_GRP_ID                  AS "svGrpId",
+		       "osv".XML_VALID_FLAG             AS "xmlValidFlag",
+		       "osv".STD_FIELD_CHECK            AS "stdFieldCheck",
+		       "osv".JK_ADAP_FLAG               AS "jkAdapFlag",
+		       "osv".JK_ADAP_TYPE               AS "jkAdapType",
+		       "osv".LOCK_TYPE                  AS "lockType",
+		       "osv".AUDIT_STATE                AS "auditState",
+		       "osv".SV_STATUS                  AS "svStatus",
+		       "osv".SV_CREATE_TIME             AS "svCreateTime",
+		       "osv".SV_CREATE_USER             AS "svCreateUser",
+		       "osv".SV_UPDATE_TIME             AS "svUpdateTime",
+		       "osv".SV_UPDATE_USER             AS "svUpdateUser",
+		       "osv".JK_VERSION_ID              AS "jkVersionId",
+		       "osv".APP_GLOBETRADECODE         AS "appGlobetradecode",
+		       "osv".MULTI_VERSION              AS "mutiVersion",
+		       "osv".SV_MESSAGE_FORMAT          AS "svMessageFormat",
+		       "osv".SV_COMMUNICATION_PROTOCOL  AS "svCommunicationProtocol",
+		       "osv".SV_HTTP_URL                AS "svHttpUrl",
+		       "osv".SV_EXTERNAL_INTERFACE_CODE AS "svExternalInterfaceCode",
+		       "osv".BYPASS_OUTPUT_SYS          AS "bypassOutputSys",
+		       "osv".SV_INTEGRATION_MODE        AS "svIntegrationMode",
+		       "osv".SV_DATA_SOURCE             AS "svDataSource",
+		       "osv".INSTANCE_ID                AS "instanceId",
+		       "osv".PROCESS_KEY                AS "processKey",
+		       "osv".APPLY_USER_ID              AS "applyUserId",
+		       "osv".APPLY_USER_NAME            AS "applyUserName",
+		       "osv".APPLY_TIME                 AS "applyTime",
+		       "osv".UPDATE_CONTENT             AS "updateContent"
+		FROM opr_scenario_version "osv"
+			     LEFT JOIN opr_system "os" ON "osv".SCN_SYS_ID = "os".SYS_ID
+		WHERE "osv".SV_ID = #{svId}
+	</select>
+
+	<!--场景指标-->
+	<select id = "getQuatoInfo" parameterType = "String" resultType = "OprScenarioVersionParam">
+		SELECT SCENE_WINDOW_TIME AS "sceneWindowTime",
+		       SCENE_TIMEOUT     AS "sceneTimeout",
+		       ONE_TIME_USER_NUM AS "oneTimeUserNum",
+		       ONLINE_DATE       AS "onlineDate",
+		       OFFLINE_DATE      AS "offlineDate",
+		       SCENE_PRIORITY    AS "scenePriority",
+		       TRADE_PER_SECOND  AS "tradePerSecond"
+		FROM opr_scenario_version_param
+		WHERE SCENE_VERSION_ID = #{ sceneVersionId}
+	</select>
+	<!--场景资源-->
+	<select id = "getResourcefo" resultType = "com.agree.web.fwlb.domain.AesbGSceneResource">
+		SELECT RESOURCE_TYPE AS "resourceType",
+		       RESOURCE_NAME AS "resourceName",
+		       RESOURCE_SIZE AS "resourceSize",
+		       RESOURCE_URL  AS "resourceUrl",
+		       RESOURCE_DESC AS "resourceDesc",
+		       CRT_TIME      AS "crtTime"
+		FROM aesb_g_scene_resource
+		WHERE SCENE_VERSION_ID = #{svId}
+	</select>
+
+	<!--被消费列表-->
+	<select id = "getConsumeIfo" resultType = "java.util.Map">
+		SELECT "t".SYS_CODE  AS "sysCode",
+		       "t".SYS_NAME  AS "sysName",
+		       "t".SYS_DES   AS "sysDes",
+		       "u".user_name as "userName",
+		       "d".dept_name as "deptName"
+		FROM opr_scenario_version "v"
+			     LEFT JOIN opr_system "t" ON "v".SCN_SYS_ID = "t".SYS_ID
+			     INNER JOIN sys_user "u" ON "t".MANAGER_ID = "u".user_id
+			     INNER JOIN sys_dept "d" ON "u".dept_id = "d".dept_id
+		WHERE "v".SV_ID = #{svId}
+	</select>
+
+	<select id = "getVersionInfoBySvId" resultType = "OprScenarioVersion">
+		SELECT SERVICE_ID AS "serviceId",
+		       SV_CODE    AS "svCode"
+		FROM opr_scenario_version
+		WHERE SV_ID = #{svId}
+	</select>
+
+	<select id = "getVersionInfo" resultMap = "OprScenarioVersionResult">
+		SELECT "ov".SVC_CODE,
+		       "ov".SVC_NAME,
+		       concat(concat("os".SYS_CODE, '-'), "os".SYS_NAME) AS SYS_NAME,
+		       "osv".SV_SCN_ID,
+		       "osv".SV_ID,
+		       "osv".SV_NO,
+		       "osv".SV_TYPE,
+		       "osv".SV_CODE,
+		       "osv".SV_NAME,
+		       "osv".SCN_DES,
+		       "osv".SV_INTERFACE,
+		       "osv".SCN_SYS_ID,
+		       "osv".RESPONSE_FLAG,
+		       "osv".TIME_OUT,
+		       "osv".HEAD_CODE,
+		       "osv".UPDATE_REASON,
+		       "osv".UPDATE_CONTENT,
+		       "osv".SERVICE_ID,
+		       "osv".SV_SV_ID,
+		       "osv".PROJECT_CODE,
+		       "osv".APPLICATION_ID,
+		       "osv".SV_GRP_ID,
+		       "osv".XML_VALID_FLAG,
+		       "osv".STD_FIELD_CHECK,
+		       "osv".JK_ADAP_FLAG,
+		       "osv".JK_ADAP_TYPE,
+		       "osv".LOCK_TYPE,
+		       "osv".AUDIT_STATE,
+		       "osv".SV_STATUS,
+		       "osv".SV_CREATE_TIME,
+		       "osv".SV_CREATE_USER,
+		       "osv".SV_UPDATE_TIME,
+		       "osv".SV_UPDATE_USER,
+		       "osv".JK_VERSION_ID,
+		       "osv".SERVICE_VERSION_ID,
+		       "osv".APP_GLOBETRADECODE,
+		       "osv".MULTI_VERSION,
+		       "osv".SV_MESSAGE_FORMAT,
+		       "osv".SV_COMMUNICATION_PROTOCOL,
+		       "osv".SV_HTTP_URL,
+		       "osv".SV_EXTERNAL_INTERFACE_CODE,
+		       "osv".BYPASS_OUTPUT_SYS,
+		       "osv".SV_INTEGRATION_MODE
+		FROM opr_scenario_version "osv"
+			     LEFT JOIN opr_system "os" ON "osv".SCN_SYS_ID = "os".SYS_ID
+			     LEFT JOIN opr_service "ov" ON "ov".SVC_ID = "osv".SERVICE_ID
+		WHERE "osv".SV_CODE = #{svCode}
+		  and "osv".SERVICE_ID = #{serviceId}
+		order by "osv".SV_NO DESC
+	</select>
+
+	<select id = "getChangeRecord" resultType = "java.util.Map">
+		SELECT ID,
+		       CHANGE_TYPE                        AS "changeType",
+		       CRT_TIME                           AS "crtTime",
+		       Blob_To_Varchar(FIELD_CHANGE_NOTE) AS "fieldChangeNote",
+		       FIELD_INOUT                        AS "fieldInout",
+		       FIELD_NAME_CN                      AS "fieldNameCn",
+		       FIELD_NAME_EN                      AS "fieldNameEn",
+		       FIELD_POSITION                     AS "fieldPosition",
+		       RECORD_TYPE                        AS "recordType",
+		       SCENE_ID                           AS "sceneId",
+		       SCENE_VERSION_ID                   AS "sceneVersionId"
+		FROM aesb_g_scene_change_record
+		WHERE SCENE_VERSION_ID = #{ svId}
+	</select>
+
+
+	<select id = "selectResourceName" resultType = "String">
+		SELECT RESOURCE_NAME as resourceName
+		FROM aesb_g_scene_resource
+		WHERE SCENE_VERSION_ID = #{svId}
+		  and RESOURCE_TYPE = #{resourceType}
+	</select>
+
+	<select id = "getSceneVersionNameBySvId" parameterType = "String" resultType = "String">
+		select SV_NAME as "svName"
+		from opr_scenario_version
+		where SV_ID = #{svId}
+	</select>
+
+	<select id = "getSysInfoByCode" resultType = "oprSystem">
+		SELECT "p".PROJECT_CODE AS "projectCode",
+		       "m".SYSTEM_ID    AS "systemId"
+		FROM aesb_g_project_info "p"
+			     LEFT JOIN aesb_g_sys_pro_mapping "m" ON "p".PROJECT_CODE = "m".PROJECT_CODE
+		WHERE "m".PROJECT_CODE = #{ projectCode}
+	</select>
+
+
+	<select id = "getBasicByCodeAndName" resultType = "String">
+		SELECT SV_ID as "svId"
+		FROM opr_scenario_version
+		WHERE SV_CODE = #{svCode}
+		  AND SV_NAME = #{svName}
+		  AND SV_NO = (
+			SELECT max(SV_NO) FROM opr_scenario_version WHERE SV_CODE = #{svCode} AND SV_NAME = #{svName}
+		)
+	</select>
+
+	<!--根据svid获取所有字段-->
+	<select id = "getDetailBySvId" parameterType = "String" resultMap = "OprScenarioVersionResult">
+		select *
+		from opr_scenario_version
+		where SV_ID = #{svId}
+	</select>
+
+	<!--批量导入-->
+	<insert id = "saveBatch">
+		begin
+		<foreach collection = "list" item = "item" index = "index">
+			INSERT INTO opr_scenario_version
+			(
+			SV_SCN_ID,SV_ID,SV_NO,SV_TYPE,SV_CODE,SV_NAME,SV_INTERFACE,SCN_SYS_ID,RESPONSE_FLAG,
+			SERVICE_ID,SV_SV_ID,PROJECT_CODE,APPLICATION_ID,XML_VALID_FLAG,STD_FIELD_CHECK,
+			JK_ADAP_FLAG,JK_ADAP_TYPE,LOCK_TYPE,UPDATE_REASON,UPDATE_CONTENT,AUDIT_STATE,SV_STATUS,
+			SV_CREATE_TIME,SV_UPDATE_TIME
+			)
+			values(
+			#{item.svScnId}, #{item.svId}, #{item.svNo}, #{item.svType},
+			#{item.svCode},#{item.svName},#{item.svInterface},#{item.scnSysId},#{item.responseFlag},
+			#{item.serviceId},
+			#{item.svSvId},#{item.projectCode},#{item.applicationId,jdbcType=VARCHAR},#{item.xmlValidFlag},#{item.stdFieldCheck},#{item.jkAdapFlag},#{item.jkAdapType},
+			#{item.lockType},#{item.updateReason},#{item.updateContent}, #{item.auditState}, #{item.svStatus},
+			#{item.svCreateTime},sysdate
+			);
+		</foreach>
+		end;
+
+	</insert>
+
+	<!--批量指标导入-->
+	<insert id = "saveParamBatch">
+		begin
+		<foreach collection = "list" item = "item" index = "index">
+			INSERT INTO opr_scenario_version_param
+			(SCENE_ID,SCENE_VERSION_ID,SCENE_PRIORITY,SCENE_TIMEOUT) values
+			(
+			#{item.sceneId}, #{item.sceneVersionId}, #{item.scenePriority},#{item.sceneTimeout}
+			);
+		</foreach>
+		end;
+	</insert>
+
+	<update id = "updateScenarioVersion" parameterType = "oprScenarioVersion">
+		update opr_scenario_version
+		<set>
+			<if test = "svScnId != null and svScnId != ''">SV_SCN_ID = #{svScnId},</if>
+			<if test = "svNo != null and svNo != ''">SV_NO = #{svNo},</if>
+			<if test = "svType != null and svType != ''">SV_TYPE = #{svType},</if>
+			<if test = "svCode != null and svCode != ''">SV_CODE = #{svCode},</if>
+			<if test = "svName != null and svName != ''">SV_NAME = #{svName},</if>
+			<if test = "scnDes != null and scnDes != ''">SCN_DES = #{scnDes},</if>
+			<if test = "svInterface != null and svInterface != ''">SV_INTERFACE = #{svInterface},</if>
+			<if test = "scnSysId != null and scnSysId != ''">SCN_SYS_ID = #{scnSysId},</if>
+			<if test = "responseFlag != null and responseFlag != ''">RESPONSE_FLAG = #{responseFlag},</if>
+			<if test = "timeOut != null and timeOut != ''">TIME_OUT = #{timeOut},</if>
+			<if test = "headCode != null and headCode != ''">HEAD_CODE = #{headCode},</if>
+			<if test = "updateReason != null and updateReason != ''">UPDATE_REASON = #{updateReason},</if>
+			<if test = "updateContent != null and updateContent != ''">UPDATE_CONTENT = #{updateContent},</if>
+			<if test = "serviceId != null and serviceId != ''">SERVICE_ID = #{serviceId},</if>
+			<if test = "svSvId != null and svSvId != ''">SV_SV_ID = #{svSvId},</if>
+			<if test = "projectCode != null and projectCode != ''">PROJECT_CODE = #{projectCode},</if>
+			<if test = "applicationId != null and applicationId != ''">APPLICATION_ID = #{applicationId},</if>
+			<if test = "svGrpId != null and svGrpId != ''">SV_GRP_ID = #{svGrpId},</if>
+			<if test = "xmlValidFlag != null and xmlValidFlag != ''">XML_VALID_FLAG = #{xmlValidFlag},</if>
+			<if test = "stdFieldCheck != null and stdFieldCheck != ''">STD_FIELD_CHECK = #{stdFieldCheck},</if>
+			<if test = "jkAdapFlag != null and jkAdapFlag != ''">JK_ADAP_FLAG = #{jkAdapFlag},</if>
+			<if test = "jkAdapType != null and jkAdapType != ''">JK_ADAP_TYPE = #{jkAdapType},</if>
+			<if test = "lockType != null and lockType != ''">LOCK_TYPE = #{lockType},</if>
+			<if test = "auditState != null and auditState != ''">AUDIT_STATE = #{auditState},</if>
+			<if test = "svStatus != null and svStatus != ''">SV_STATUS = #{svStatus},</if>
+			<if test = "svUpdateTime != null">SV_UPDATE_TIME = #{svUpdateTime},</if>
+			<if test = "svUpdateUser != null and svUpdateUser != ''">SV_UPDATE_USER = #{svUpdateUser},</if>
+			<if test = "jkVersionId != null and jkVersionId != ''">JK_VERSION_ID = #{jkVersionId},</if>
+			<if test = "serviceVersionId != null and serviceVersionId != ''">SERVICE_VERSION_ID = #{serviceVersionId},
+			</if>
+			<if test = "appGlobetradecode != null and appGlobetradecode != ''">APP_GLOBETRADECODE =
+				#{appGlobetradecode},
+			</if>
+			<if test = "svCommunicationProtocol != null and svCommunicationProtocol != ''">SV_COMMUNICATION_PROTOCOL =
+				#{svCommunicationProtocol},
+			</if>
+			<if test = "svHttpUrl != null and svHttpUrl != ''">SV_HTTP_URL = #{svHttpUrl},</if>
+			<if test = "svMessageFormat != null and svMessageFormat != ''">SV_MESSAGE_FORMAT = #{svMessageFormat},</if>
+			<if test = "svExternalInterfaceCode != null and svExternalInterfaceCode != ''">SV_EXTERNAL_INTERFACE_CODE =
+				#{svExternalInterfaceCode},
+			</if>
+			<if test = "instanceId != null and instanceId != ''">INSTANCE_ID = #{instanceId},</if>
+			<if test = "processKey != null and processKey != ''">PROCESS_KEY = #{processKey},</if>
+			<if test = "applyUserId != null and applyUserId != ''">APPLY_USER_ID = #{applyUserId},</if>
+			<if test = "applyUserName != null and applyUserName != ''">APPLY_USER_NAME = #{applyUserName},</if>
+			<if test = "applyTime != null">APPLY_TIME = #{applyTime},</if>
+		</set>
+		where SV_ID = #{svId}
+	</update>
+
+
+	<select id = "getInstanceBusinessByInstanceId" parameterType = "string" resultType = "java.util.Map">
+	</select>
+
+	<update id = "updateAuditState" parameterType = "map">
+		update ${module}
+		set AUDIT_STATE = 2
+		where SV_ID = #{businessKey}
+	</update>
+
+	<select id = "getSceneFiledInfo" parameterType = "sceneFieldRequest" resultMap="oprScenarioFieldResult">
+		SELECT
+		/*SF_ID "sfId",
+		SF_SV_ID "svId",
+		SCN_CODE "scnCode",
+		SF_COUNT "sfCount",
+		SF_EN_NAME "sfEnName",
+		SF_CN_NAME "sfCnName",
+		SF_TYPE "sfType",
+		SF_DATA_TYPE "sfDataType",
+		SF_LENGTH "sfLength",
+		SF_FRACTION "sfFraction",
+		SF_IS_ENSSENTIAL "sfIsEnssential",
+		SF_CYCLE_TIMES "sfCycleTimes",
+		SF_FORMAT "sfFormat",
+		SF_ENUM "sfEnum",
+		SF_DES "sfDes",
+		SF_DEFAULT "sfDefault",
+		SF_IS_SENSITIVE "sfIsSensitive",
+		SF_PATH "sfPath",
+		SF_QUOTE_NAME "sfQuoteName",
+		SF_QUOTE_NAMESPACE "sfQuoteNamespace",
+		SF_QUOTE_FILE_NAME "sfQuoteFileName",
+		SF_QUOTE_FILE_NAME_EN "sfQuoteFileNameEn",
+		SF_QUOTE_FIELD_NAME_EN "sfQuoteFieldNameEn",
+		SF_LENGTH_TYPE "sfLengthType",
+		SF_IS_STD_CHECK "sfIsStdCheck",
+		SF_STD_CODE "sfStdCode",
+		SF_HTTP_PARAM_TYPE "sfHttpParamType",
+		SF_EXAMPLE "sfExample",
+		SF_ENCRYPT_MODE "sfEncryptMode",
+		SF_STD_NAME_CN "sfStdNameCn",
+		SF_DATA_SOURCE "sfDataSource"*/
+		*
+		FROM
+		OPR_SCENARIO_FIELD
+		<where>
+			<if test = "svId != null and svId != ''">SF_SV_ID = #{svId}</if>
+			<if test = "type != null and type != ''">and SF_TYPE = #{type}</if>
+		</where>
+
+	</select>
+
+
+	<update id = "updateScenarioVersionParam" parameterType = "oprScenarioVersionParam">
+		update opr_scenario_version_param
+		<set>
+			<if test = "sceneId != null and sceneId != ''">SCENE_ID = #{sceneId},</if>
+			<if test = "sceneVersionId != null and sceneVersionId != ''">SCENE_VERSION_ID = #{sceneVersionId},</if>
+			<if test = "sceneDutyTime != null and sceneDutyTime != ''">SCENE_DUTY_TIME = #{sceneDutyTime},</if>
+			<if test = "sceneWindowTime != null and sceneWindowTime != ''">SCENE_WINDOW_TIME = #{sceneWindowTime},</if>
+			<if test = "sceneTimeout != null and sceneTimeout != ''">SCENE_TIMEOUT = #{sceneTimeout},</if>
+			<if test = "oneTimeUserNum != null and oneTimeUserNum != ''">ONE_TIME_USER_NUM = #{oneTimeUserNum},</if>
+			<if test = "tradePerSecond != null and tradePerSecond != ''">TRADE_PER_SECOND = #{tradePerSecond},</if>
+			<if test = "sceneAvailable != null and sceneAvailable != ''">SCENE_AVAILABLE = #{sceneAvailable},</if>
+			<if test = "sceneFixTime != null and sceneFixTime != ''">SCENE_FIX_TIME = #{sceneFixTime},</if>
+			<if test = "rspTime != null and rspTime != ''">RSP_TIME = #{rspTime},</if>
+			<if test = "scenePriority != null and scenePriority != ''">SCENE_PRIORITY = #{scenePriority},</if>
+			<if test = "onlineDate != null and onlineDate != ''">ONLINE_DATE = #{onlineDate},</if>
+			<if test = "offlineDate != null and offlineDate != ''">OFFLINE_DATE = #{offlineDate},</if>
+			<if test = "isOpen != null and isOpen != ''">IS_OPEN = #{isOpen},</if>
+			<if test = "methodName != null and methodName != ''">METHOD_NAME = #{methodName},</if>
+			<if test = "apiType != null and apiType != ''">API_TYPE = #{apiType},</if>
+			<if test = "authFlag != null and authFlag != ''">AUTH_FLAG = #{authFlag},</if>
+			<if test = "freeFlag != null and freeFlag != ''">FREE_FLAG = #{freeFlag},</if>
+			<if test = "requestUrl != null and requestUrl != ''">REQUEST_URL = #{requestUrl},</if>
+			<if test = "apiPrice != null and apiPrice != ''">API_PRICE = #{apiPrice},</if>
+			<if test = "apiVersion != null and apiVersion != ''">API_VERSION = #{apiVersion},</if>
+			<if test = "httpMethod != null and httpMethod != ''">HTTP_METHOD = #{httpMethod},</if>
+			<if test = "checkFlag != null and checkFlag != ''">CHECK_FLAG = #{checkFlag},</if>
+			<if test = "dataSource != null and dataSource != ''">DATA_SOURCE = #{dataSource},</if>
+		</set>
+		where SCENE_VERSION_ID = #{sceneVersionId}
+	</update>
+
+	<update id = "updateScenarioVersionField" parameterType = "oprScenarioField">
+		update OPR_SCENARIO_FIELD
+		<set>
+			<if test = "scnCode != null and scnCode != ''">SCN_CODE = #{scnCode},</if>
+			<if test = "sfCount != null and sfCount != ''">SF_COUNT = #{sfCount},</if>
+			<if test = "sfEnName != null and sfEnName != ''">SF_EN_NAME = #{sfEnName},</if>
+			<if test = "sfCnName != null and sfCnName != ''">SF_CN_NAME = #{sfCnName},</if>
+			<if test = "sfType != null and sfType != ''">SF_TYPE = #{sfType},</if>
+			<if test = "sfDataType != null and sfDataType != ''">SF_DATA_TYPE = #{sfDataType},</if>
+			<if test = "sfLength != null and sfLength != ''">SF_LENGTH = #{sfLength},</if>
+			<if test = "sfFraction != null and sfFraction != ''">SF_FRACTION = #{sfFraction},</if>
+			<if test = "sfIsEnssential != null and sfIsEnssential != ''">SF_IS_ENSSENTIAL = #{sfIsEnssential},</if>
+			<if test = "sfCycleTimes != null and sfCycleTimes != ''">SF_CYCLE_TIMES = #{sfCycleTimes},</if>
+			<if test = "sfFormat != null and sfFormat != ''">SF_FORMAT = #{sfFormat},</if>
+			<if test = "sfEnum != null and sfEnum != ''">SF_ENUM = #{sfEnum},</if>
+			<if test = "sfDes != null and sfDes != ''">SF_DES = #{sfDes},</if>
+			<if test = "sfDefault != null and sfDefault != ''">SF_DEFAULT = #{sfDefault},</if>
+			<if test = "sfIsSensitive != null and sfIsSensitive != ''">SF_IS_SENSITIVE = #{sfIsSensitive},</if>
+			<if test = "sfPath != null and sfPath != ''">SF_PATH = #{sfPath},</if>
+			<if test = "sfLengthType != null and sfLengthType != ''">SF_LENGTH_TYPE = #{sfLengthType},</if>
+		</set>
+		where SF_SV_ID = #{sfSvId};
+	</update>
+
+	<insert id = "insertScenarioVersionField" parameterType = "oprScenarioField">
+		insert into OPR_SCENARIO_FIELD
+		(
+		<if test = "sfId != null and sfId !=''">SF_ID,</if>
+		<if test = "sfSvId != null and sfSvId !=''">SF_SV_ID,</if>
+		<if test = "scnCode != null and scnCode !=''">SCN_CODE,</if>
+		<if test = "sfCount != null and sfCount !=''">SF_COUNT,</if>
+		<if test = "sfEnName != null and sfEnName !=''">SF_EN_NAME,</if>
+		<if test = "sfCnName != null and sfCnName !=''">SF_CN_NAME,</if>
+		<if test = "sfType != null and sfType !=''">SF_TYPE,</if>
+		<if test = "sfDataType != null and sfDataType !=''">SF_DATA_TYPE,</if>
+		)values (
+		<if test = "sfId != null and sfId !=''">#{sfId},</if>
+		<if test = "sfSvId != null and sfSvId !=''">#{sfSvId},</if>
+		<if test = "scnCode != null and scnCode !=''">#{scnCode},</if>
+		<if test = "sfCount != null and sfCount !=''">#{sfCount},</if>
+		<if test = "sfEnName != null and sfEnName !=''">#{sfEnName},</if>
+		<if test = "sfCnName != null and sfCnName !=''">#{sfCnName},</if>
+		<if test = "sfType != null and sfType !=''">#{sfType},</if>
+		<if test = "sfDataType != null and sfDataType !=''">#{sfDataType},</if>
+		)
+	</insert>
+
+
+	<select id = "getSceneFieldBySvId" resultType="int" parameterType="oprScenarioField">
+		select count(1)
+		from OPR_SCENARIO_FIELD
+		where SF_SV_ID = #{sfSvId}
+		  and SF_TYPE = #{sfType}
+	</select>
+
+
+	<delete id = "deleteScenarioVersionField" parameterType="string">
+		delete from OPR_SCENARIO_FIELD where SF_SV_ID =  #{svId}
+	</delete>
+
+	<insert id = "insertBatchField" parameterType="oprScenarioField">
+		begin
+		<foreach collection = "list" item = "item" index = "index">
+			INSERT INTO OPR_SCENARIO_FIELD(SF_ID,SF_SV_ID,SCN_CODE,SF_COUNT,SF_EN_NAME,SF_CN_NAME,SF_TYPE,SF_DATA_TYPE,SF_LENGTH,SF_FRACTION,SF_IS_ENSSENTIAL,SF_CYCLE_TIMES,SF_FORMAT,SF_ENUM,SF_DES,SF_DEFAULT,SF_IS_SENSITIVE,SF_PATH)values
+			(#{item.sfId,jdbcType=VARCHAR},#{item.sfSvId,jdbcType=VARCHAR},#{item.scnCode,jdbcType=VARCHAR},#{item.sfCount,jdbcType=VARCHAR},#{item.sfEnName,jdbcType=VARCHAR},#{item.sfCnName,jdbcType=VARCHAR},#{item.sfType,jdbcType=VARCHAR},#{item.sfDataType,jdbcType=VARCHAR},#{item.sfLength,jdbcType=VARCHAR},
+			 #{item.sfFraction,jdbcType=VARCHAR},#{item.sfIsEnssential,jdbcType=VARCHAR},#{item.sfCycleTimes,jdbcType=VARCHAR},#{item.sfFormat,jdbcType=VARCHAR},
+			 #{item.sfEnum,jdbcType=VARCHAR},#{item.sfDes,jdbcType=VARCHAR},#{item.sfDefault,jdbcType=VARCHAR},#{item.sfIsSensitive,jdbcType=VARCHAR},#{item.sfPath,jdbcType=VARCHAR});
+		</foreach>
+		end;
+	</insert>
+
+</mapper>

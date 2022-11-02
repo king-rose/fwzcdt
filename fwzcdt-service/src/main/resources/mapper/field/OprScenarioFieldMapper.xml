@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.fwlb.mapper.OprScenarioFieldMapper">
+    
+    <resultMap type="OprScenarioField" id="OprScenarioFieldResult">
+        <result property="sfId"    column="SF_ID"    />
+        <result property="sfSvId"    column="SF_SV_ID"    />
+        <result property="scnCode"    column="SCN_CODE"    />
+        <result property="sfCount"    column="SF_COUNT"    />
+        <result property="sfEnName"    column="SF_EN_NAME"    />
+        <result property="sfCnName"    column="SF_CN_NAME"    />
+        <result property="sfType"    column="SF_TYPE"    />
+        <result property="sfDataType"    column="SF_DATA_TYPE"    />
+        <result property="sfLength"    column="SF_LENGTH"    />
+        <result property="sfFraction"    column="SF_FRACTION"    />
+        <result property="sfIsEnssential"    column="SF_IS_ENSSENTIAL"    />
+        <result property="sfCycleTimes"    column="SF_CYCLE_TIMES"    />
+        <result property="sfFormat"    column="SF_FORMAT"    />
+        <result property="sfEnum"    column="SF_ENUM"    />
+        <result property="sfDes"    column="SF_DES"    />
+        <result property="sfDefault"    column="SF_DEFAULT"    />
+        <result property="sfIsSensitive"    column="SF_IS_SENSITIVE"    />
+        <result property="sfPath"    column="SF_PATH"    />
+        <result property="sfQuoteName"    column="SF_QUOTE_NAME"    />
+        <result property="sfQuoteNamespace"    column="SF_QUOTE_NAMESPACE"    />
+        <result property="sfQuoteFileName"    column="SF_QUOTE_FILE_NAME"    />
+        <result property="sfQuoteFileNameEn"    column="SF_QUOTE_FILE_NAME_EN"    />
+        <result property="sfQuoteFieldNameEn"    column="SF_QUOTE_FIELD_NAME_EN"    />
+        <result property="sfLengthType"    column="SF_LENGTH_TYPE"    />
+        <result property="sfIsStdCheck"    column="SF_IS_STD_CHECK"    />
+        <result property="sfStdCode"    column="SF_STD_CODE"    />
+        <result property="sfHttpParamType"    column="SF_HTTP_PARAM_TYPE"    />
+        <result property="sfExample"    column="SF_EXAMPLE"    />
+        <result property="sfEncryptMode"    column="SF_ENCRYPT_MODE"    />
+        <result property="sfStdNameCn"    column="SF_STD_NAME_CN"    />
+        <result property="sfDataSource"    column="SF_DATA_SOURCE"    />
+    </resultMap>
+
+    <sql id="selectOprScenarioFieldVo">
+        select SF_ID, SF_SV_ID, SCN_CODE, SF_COUNT, SF_EN_NAME, SF_CN_NAME, SF_TYPE, SF_DATA_TYPE, SF_LENGTH, SF_FRACTION, SF_IS_ENSSENTIAL, SF_CYCLE_TIMES, SF_FORMAT, SF_ENUM, SF_DES, SF_DEFAULT, SF_IS_SENSITIVE, SF_PATH, SF_QUOTE_NAME, SF_QUOTE_NAMESPACE, SF_QUOTE_FILE_NAME, SF_QUOTE_FILE_NAME_EN, SF_QUOTE_FIELD_NAME_EN, SF_LENGTH_TYPE, SF_IS_STD_CHECK, SF_STD_CODE, SF_HTTP_PARAM_TYPE, SF_EXAMPLE, SF_ENCRYPT_MODE, SF_STD_NAME_CN, SF_DATA_SOURCE from opr_scenario_field
+    </sql>
+
+    <select id="selectOprScenarioFieldList" parameterType="OprScenarioField" resultMap="OprScenarioFieldResult">
+        <include refid="selectOprScenarioFieldVo"/>
+        <where>  
+            <if test="sfId != null  and sfId != ''"> and SF_ID = #{sfId}</if>
+            <if test="sfEnName != null  and sfEnName != ''"> and SF_EN_NAME like concat('%', #{sfEnName}, '%')</if>
+            <if test="sfCnName != null  and sfCnName != ''"> and SF_CN_NAME like concat('%', #{sfCnName}, '%')</if>
+            <if test="sfType != null  and sfType != ''"> and SF_TYPE = #{sfType}</if>
+            <if test="sfDataType != null  and sfDataType != ''"> and SF_DATA_TYPE = #{sfDataType}</if>
+            <if test="sfLength != null  and sfLength != ''"> and SF_LENGTH = #{sfLength}</if>
+            <if test="sfFraction != null  and sfFraction != ''"> and SF_FRACTION = #{sfFraction}</if>
+            <if test="sfIsEnssential != null  and sfIsEnssential != ''"> and SF_IS_ENSSENTIAL = #{sfIsEnssential}</if>
+            <if test="sfCycleTimes != null  and sfCycleTimes != ''"> and SF_CYCLE_TIMES = #{sfCycleTimes}</if>
+            <if test="sfFormat != null  and sfFormat != ''"> and SF_FORMAT = #{sfFormat}</if>
+            <if test="sfEnum != null  and sfEnum != ''"> and SF_ENUM = #{sfEnum}</if>
+            <if test="sfDes != null  and sfDes != ''"> and SF_DES = #{sfDes}</if>
+            <if test="sfDefault != null  and sfDefault != ''"> and SF_DEFAULT = #{sfDefault}</if>
+            <if test="sfIsSensitive != null  and sfIsSensitive != ''"> and SF_IS_SENSITIVE = #{sfIsSensitive}</if>
+            <if test="sfPath != null  and sfPath != ''"> and SF_PATH = #{sfPath}</if>
+            <if test="sfQuoteName != null  and sfQuoteName != ''"> and SF_QUOTE_NAME like concat('%', #{sfQuoteName}, '%')</if>
+            <if test="sfQuoteNamespace != null  and sfQuoteNamespace != ''"> and SF_QUOTE_NAMESPACE = #{sfQuoteNamespace}</if>
+            <if test="sfQuoteFileName != null  and sfQuoteFileName != ''"> and SF_QUOTE_FILE_NAME like concat('%', #{sfQuoteFileName}, '%')</if>
+            <if test="sfQuoteFileNameEn != null  and sfQuoteFileNameEn != ''"> and SF_QUOTE_FILE_NAME_EN = #{sfQuoteFileNameEn}</if>
+            <if test="sfQuoteFieldNameEn != null  and sfQuoteFieldNameEn != ''"> and SF_QUOTE_FIELD_NAME_EN = #{sfQuoteFieldNameEn}</if>
+            <if test="sfLengthType != null  and sfLengthType != ''"> and SF_LENGTH_TYPE = #{sfLengthType}</if>
+            <if test="sfIsStdCheck != null  and sfIsStdCheck != ''"> and SF_IS_STD_CHECK = #{sfIsStdCheck}</if>
+            <if test="sfStdCode != null  and sfStdCode != ''"> and SF_STD_CODE = #{sfStdCode}</if>
+            <if test="sfHttpParamType != null  and sfHttpParamType != ''"> and SF_HTTP_PARAM_TYPE = #{sfHttpParamType}</if>
+            <if test="sfExample != null  and sfExample != ''"> and SF_EXAMPLE = #{sfExample}</if>
+            <if test="sfEncryptMode != null  and sfEncryptMode != ''"> and SF_ENCRYPT_MODE = #{sfEncryptMode}</if>
+            <if test="sfStdNameCn != null  and sfStdNameCn != ''"> and SF_STD_NAME_CN = #{sfStdNameCn}</if>
+            <if test="sfDataSource != null  and sfDataSource != ''"> and SF_DATA_SOURCE = #{sfDataSource}</if>
+        </where>
+    </select>
+    
+    <select id="selectOprScenarioFieldById" parameterType="String" resultMap="OprScenarioFieldResult">
+        <include refid="selectOprScenarioFieldVo"/>
+        where SF_SV_ID = #{sfSvId}
+    </select>
+
+    <insert id="insertOprScenarioField" parameterType="OprScenarioField">
+        insert into opr_scenario_field
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sfId != null and sfId != ''">SF_ID,</if>
+            <if test="sfSvId != null">SF_SV_ID,</if>
+            <if test="scnCode != null">SCN_CODE,</if>
+            <if test="sfCount != null">SF_COUNT,</if>
+            <if test="sfEnName != null and sfEnName != ''">SF_EN_NAME,</if>
+            <if test="sfCnName != null and sfCnName != ''">SF_CN_NAME,</if>
+            <if test="sfType != null and sfType != ''">SF_TYPE,</if>
+            <if test="sfDataType != null and sfDataType != ''">SF_DATA_TYPE,</if>
+            <if test="sfLength != null">SF_LENGTH,</if>
+            <if test="sfFraction != null">SF_FRACTION,</if>
+            <if test="sfIsEnssential != null">SF_IS_ENSSENTIAL,</if>
+            <if test="sfCycleTimes != null">SF_CYCLE_TIMES,</if>
+            <if test="sfFormat != null">SF_FORMAT,</if>
+            <if test="sfEnum != null">SF_ENUM,</if>
+            <if test="sfDes != null">SF_DES,</if>
+            <if test="sfDefault != null">SF_DEFAULT,</if>
+            <if test="sfIsSensitive != null">SF_IS_SENSITIVE,</if>
+            <if test="sfPath != null">SF_PATH,</if>
+            <if test="sfQuoteName != null">SF_QUOTE_NAME,</if>
+            <if test="sfQuoteNamespace != null">SF_QUOTE_NAMESPACE,</if>
+            <if test="sfQuoteFileName != null">SF_QUOTE_FILE_NAME,</if>
+            <if test="sfQuoteFileNameEn != null">SF_QUOTE_FILE_NAME_EN,</if>
+            <if test="sfQuoteFieldNameEn != null">SF_QUOTE_FIELD_NAME_EN,</if>
+            <if test="sfLengthType != null">SF_LENGTH_TYPE,</if>
+            <if test="sfIsStdCheck != null">SF_IS_STD_CHECK,</if>
+            <if test="sfStdCode != null">SF_STD_CODE,</if>
+            <if test="sfHttpParamType != null">SF_HTTP_PARAM_TYPE,</if>
+            <if test="sfExample != null">SF_EXAMPLE,</if>
+            <if test="sfEncryptMode != null">SF_ENCRYPT_MODE,</if>
+            <if test="sfStdNameCn != null">SF_STD_NAME_CN,</if>
+            <if test="sfDataSource != null">SF_DATA_SOURCE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sfId != null and sfId != ''">#{sfId},</if>
+            <if test="sfSvId != null">#{sfSvId},</if>
+            <if test="scnCode != null">#{scnCode},</if>
+            <if test="sfCount != null">#{sfCount},</if>
+            <if test="sfEnName != null and sfEnName != ''">#{sfEnName},</if>
+            <if test="sfCnName != null and sfCnName != ''">#{sfCnName},</if>
+            <if test="sfType != null and sfType != ''">#{sfType},</if>
+            <if test="sfDataType != null and sfDataType != ''">#{sfDataType},</if>
+            <if test="sfLength != null">#{sfLength},</if>
+            <if test="sfFraction != null">#{sfFraction},</if>
+            <if test="sfIsEnssential != null">#{sfIsEnssential},</if>
+            <if test="sfCycleTimes != null">#{sfCycleTimes},</if>
+            <if test="sfFormat != null">#{sfFormat},</if>
+            <if test="sfEnum != null">#{sfEnum},</if>
+            <if test="sfDes != null">#{sfDes},</if>
+            <if test="sfDefault != null">#{sfDefault},</if>
+            <if test="sfIsSensitive != null">#{sfIsSensitive},</if>
+            <if test="sfPath != null">#{sfPath},</if>
+            <if test="sfQuoteName != null">#{sfQuoteName},</if>
+            <if test="sfQuoteNamespace != null">#{sfQuoteNamespace},</if>
+            <if test="sfQuoteFileName != null">#{sfQuoteFileName},</if>
+            <if test="sfQuoteFileNameEn != null">#{sfQuoteFileNameEn},</if>
+            <if test="sfQuoteFieldNameEn != null">#{sfQuoteFieldNameEn},</if>
+            <if test="sfLengthType != null">#{sfLengthType},</if>
+            <if test="sfIsStdCheck != null">#{sfIsStdCheck},</if>
+            <if test="sfStdCode != null">#{sfStdCode},</if>
+            <if test="sfHttpParamType != null">#{sfHttpParamType},</if>
+            <if test="sfExample != null">#{sfExample},</if>
+            <if test="sfEncryptMode != null">#{sfEncryptMode},</if>
+            <if test="sfStdNameCn != null">#{sfStdNameCn},</if>
+            <if test="sfDataSource != null">#{sfDataSource},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOprScenarioField" parameterType="OprScenarioField">
+        update opr_scenario_field
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sfId != null and sfId != ''">SF_ID = #{sfId},</if>
+            <if test="scnCode != null">SCN_CODE = #{scnCode},</if>
+            <if test="sfCount != null">SF_COUNT = #{sfCount},</if>
+            <if test="sfEnName != null and sfEnName != ''">SF_EN_NAME = #{sfEnName},</if>
+            <if test="sfCnName != null and sfCnName != ''">SF_CN_NAME = #{sfCnName},</if>
+            <if test="sfType != null and sfType != ''">SF_TYPE = #{sfType},</if>
+            <if test="sfDataType != null and sfDataType != ''">SF_DATA_TYPE = #{sfDataType},</if>
+            <if test="sfLength != null">SF_LENGTH = #{sfLength},</if>
+            <if test="sfFraction != null">SF_FRACTION = #{sfFraction},</if>
+            <if test="sfIsEnssential != null">SF_IS_ENSSENTIAL = #{sfIsEnssential},</if>
+            <if test="sfCycleTimes != null">SF_CYCLE_TIMES = #{sfCycleTimes},</if>
+            <if test="sfFormat != null">SF_FORMAT = #{sfFormat},</if>
+            <if test="sfEnum != null">SF_ENUM = #{sfEnum},</if>
+            <if test="sfDes != null">SF_DES = #{sfDes},</if>
+            <if test="sfDefault != null">SF_DEFAULT = #{sfDefault},</if>
+            <if test="sfIsSensitive != null">SF_IS_SENSITIVE = #{sfIsSensitive},</if>
+            <if test="sfPath != null">SF_PATH = #{sfPath},</if>
+            <if test="sfQuoteName != null">SF_QUOTE_NAME = #{sfQuoteName},</if>
+            <if test="sfQuoteNamespace != null">SF_QUOTE_NAMESPACE = #{sfQuoteNamespace},</if>
+            <if test="sfQuoteFileName != null">SF_QUOTE_FILE_NAME = #{sfQuoteFileName},</if>
+            <if test="sfQuoteFileNameEn != null">SF_QUOTE_FILE_NAME_EN = #{sfQuoteFileNameEn},</if>
+            <if test="sfQuoteFieldNameEn != null">SF_QUOTE_FIELD_NAME_EN = #{sfQuoteFieldNameEn},</if>
+            <if test="sfLengthType != null">SF_LENGTH_TYPE = #{sfLengthType},</if>
+            <if test="sfIsStdCheck != null">SF_IS_STD_CHECK = #{sfIsStdCheck},</if>
+            <if test="sfStdCode != null">SF_STD_CODE = #{sfStdCode},</if>
+            <if test="sfHttpParamType != null">SF_HTTP_PARAM_TYPE = #{sfHttpParamType},</if>
+            <if test="sfExample != null">SF_EXAMPLE = #{sfExample},</if>
+            <if test="sfEncryptMode != null">SF_ENCRYPT_MODE = #{sfEncryptMode},</if>
+            <if test="sfStdNameCn != null">SF_STD_NAME_CN = #{sfStdNameCn},</if>
+            <if test="sfDataSource != null">SF_DATA_SOURCE = #{sfDataSource},</if>
+        </trim>
+        where SF_SV_ID = #{sfSvId}
+    </update>
+
+    <delete id="deleteOprScenarioFieldById" parameterType="String">
+        delete from opr_scenario_field where SF_SV_ID = #{sfSvId}
+    </delete>
+
+    <delete id="deleteOprScenarioFieldByIds" parameterType="String">
+        delete from opr_scenario_field where SF_SV_ID in 
+        <foreach item="sfSvId" collection="array" open="(" separator="," close=")">
+            #{sfSvId}
+        </foreach>
+    </delete>
+
+
+
+    <select id="scenarioDefinedIn" parameterType="String" resultMap="OprScenarioFieldResult">
+       SELECT
+        SF_ID,
+        SF_SV_ID,
+        SCN_CODE,
+        SF_COUNT,
+        SF_EN_NAME,
+        SF_CN_NAME,
+        SF_TYPE,
+        SF_DATA_TYPE,
+        SF_LENGTH,
+        SF_FRACTION,
+        SF_IS_ENSSENTIAL,
+        SF_CYCLE_TIMES,
+        SF_FORMAT,
+        cast(SF_ENUM as char) as SF_ENUM,
+        cast(SF_DES as char) as SF_DES,
+        SF_DEFAULT,
+        SF_IS_SENSITIVE,
+        SF_PATH,
+        SF_QUOTE_NAME,
+        SF_QUOTE_NAMESPACE,
+        SF_QUOTE_FILE_NAME,
+        SF_QUOTE_FILE_NAME_EN,
+        SF_QUOTE_FIELD_NAME_EN,
+        SF_LENGTH_TYPE,
+        SF_IS_STD_CHECK,
+        SF_STD_CODE,
+        SF_HTTP_PARAM_TYPE,
+        SF_EXAMPLE,
+        SF_ENCRYPT_MODE,
+        SF_STD_NAME_CN,
+        SF_DATA_SOURCE
+        FROM
+        opr_scenario_field
+        where SF_SV_ID = #{svId} and SF_TYPE = '1'
+    </select>
+
+    <select id="scenarioDefinedOut" parameterType="String" resultMap="OprScenarioFieldResult">
+        SELECT
+        SF_ID,
+        SF_SV_ID,
+        SCN_CODE,
+        SF_COUNT,
+        SF_EN_NAME,
+        SF_CN_NAME,
+        SF_TYPE,
+        SF_DATA_TYPE,
+        SF_LENGTH,
+        SF_FRACTION,
+        SF_IS_ENSSENTIAL,
+        SF_CYCLE_TIMES,
+        SF_FORMAT,
+        cast(SF_ENUM as char) as SF_ENUM,
+        cast(SF_DES as char) as SF_DES,
+        SF_DEFAULT,
+        SF_IS_SENSITIVE,
+        SF_PATH,
+        SF_QUOTE_NAME,
+        SF_QUOTE_NAMESPACE,
+        SF_QUOTE_FILE_NAME,
+        SF_QUOTE_FILE_NAME_EN,
+        SF_QUOTE_FIELD_NAME_EN,
+        SF_LENGTH_TYPE,
+        SF_IS_STD_CHECK,
+        SF_STD_CODE,
+        SF_HTTP_PARAM_TYPE,
+        SF_EXAMPLE,
+        SF_ENCRYPT_MODE,
+        SF_STD_NAME_CN,
+        SF_DATA_SOURCE
+        FROM
+        opr_scenario_field
+        where SF_SV_ID = #{svId} and SF_TYPE = '0'
+    </select>
+
+    <insert id="saveBatch">
+        begin
+            <foreach collection="list" item="item" index="index">
+                INSERT INTO opr_scenario_field(
+                SF_ID,SF_SV_ID,SCN_CODE,SF_COUNT,SF_EN_NAME,SF_CN_NAME,SF_TYPE,
+                SF_DATA_TYPE,SF_PATH,SF_LENGTH,SF_FORMAT,SF_IS_SENSITIVE,SF_IS_ENSSENTIAL,SF_LENGTH_TYPE
+                )
+                values
+                (
+                    #{item.sfId}, #{item.sfSvId}, #{item.scnCode},#{item.sfCount},#{item.sfEnName},#{item.sfCnName},#{item.sfType}
+                    ,#{item.sfDataType},#{item.sfPath},#{item.sfLength},#{item.sfFormat},#{item.sfIsSensitive},#{item.sfIsEnssential},
+                    #{item.sfLengthType}
+                );
+            </foreach>
+        end;
+    </insert>
+</mapper>

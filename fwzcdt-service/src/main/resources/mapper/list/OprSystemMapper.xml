@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.agree.web.system.mapper.OprSystemMapper">
+
+    <resultMap type="OprSystem" id="OprSystemResult">
+        <result property="sysId" column="SYS_ID"/>
+        <result property="sysCode" column="SYS_CODE"/>
+        <result property="sysName" column="SYS_NAME"/>
+        <result property="sysDes" column="SYS_DES"/>
+        <result property="areaId" column="AREA_ID"/>
+        <result property="systemLayer" column="SYSTEM_LAYER"/>
+        <result property="developer" column="DEVELOPER"/>
+        <result property="onlineDate" column="ONLINE_DATE"/>
+        <result property="offlineDate" column="OFFLINE_DATE"/>
+        <result property="techDept" column="TECH_DEPT"/>
+        <result property="managerId" column="MANAGER_ID"/>
+        <result property="appCoorUsers" column="APP_COOR_USERS"/>
+        <result property="busiDept" column="BUSI_DEPT"/>
+        <result property="busiLeader" column="BUSI_LEADER"/>
+        <result property="oprLeader" column="OPR_LEADER"/>
+        <result property="disaLevel" column="DISA_LEVEL"/>
+        <result property="disaMode" column="DISA_MODE"/>
+        <result property="disaRecRtoTime" column="DISA_REC_RTO_TIME"/>
+        <result property="disaRecRpoTime" column="DISA_REC_RPO_TIME"/>
+        <result property="disaSystemNote" column="DISA_SYSTEM_NOTE"/>
+        <result property="secLevel" column="SEC_LEVEL"/>
+        <result property="contPlan" column="CONT_PLAN"/>
+        <result property="monitor" column="MONITOR"/>
+        <result property="serviceTime" column="SERVICE_TIME"/>
+        <result property="sysUser" column="SYS_USER"/>
+        <result property="serviceArea" column="SERVICE_AREA"/>
+        <result property="faceToCust" column="FACE_TO_CUST"/>
+        <result property="timeOut" column="TIME_OUT"/>
+        <result property="sysType" column="SYS_TYPE"/>
+        <result property="accessMode" column="ACCESS_MODE"/>
+        <result property="compBrowser" column="COMP_BROWSER"/>
+        <result property="highAvailableTech" column="HIGH_AVAILABLE_TECH"/>
+        <result property="loadBalance" column="LOAD_BALANCE"/>
+        <result property="oprSystem" column="OPR_SYSTEM"/>
+        <result property="sysDatabase" column="SYS_DATABASE"/>
+        <result property="middleware" column="MIDDLEWARE"/>
+        <result property="innerJkPass" column="INNER_JK_PASS"/>
+        <result property="sysStatus" column="SYS_STATUS"/>
+        <result property="sysCreateTime" column="SYS_CREATE_TIME"/>
+        <result property="sysCreateUser" column="SYS_CREATE_USER"/>
+        <result property="sysUpdateTime" column="SYS_UPDATE_TIME"/>
+        <result property="sysUpdateUser" column="SYS_UPDATE_USER"/>
+        <result property="sysPvId" column="SYS_PV_ID"/>
+        <result property="sysScId" column="SYS_SC_ID"/>
+        <result property="authType" column="AUTH_TYPE"/>
+        <result property="connectToEsb" column="CONNECT_TO_ESB"/>
+        <result property="channelCode" column="CHANNEL_CODE"/>
+        <result property="communicationProtocol" column="COMMUNICATION_PROTOCOL"/>
+        <result property="messageFormat" column="MESSAGE_FORMAT"/>
+        <result property="sysPartition" column="SYS_PARTITION"/>
+        <result property="integrationMode" column="INTEGRATION_MODE"/>
+        <result property="nickName" column="NICK_NAME" />
+    </resultMap>
+
+    <sql id="selectOprSystemVo">
+        select SYS_ID, SYS_CODE, SYS_NAME, SYS_DES, AREA_ID, SYSTEM_LAYER, DEVELOPER, ONLINE_DATE, OFFLINE_DATE, TECH_DEPT, MANAGER_ID, APP_COOR_USERS, BUSI_DEPT, BUSI_LEADER, OPR_LEADER, DISA_LEVEL, DISA_MODE, DISA_REC_RTO_TIME, DISA_REC_RPO_TIME, DISA_SYSTEM_NOTE, SEC_LEVEL, CONT_PLAN, MONITOR, SERVICE_TIME, SYS_USER, SERVICE_AREA, FACE_TO_CUST, TIME_OUT, SYS_TYPE, ACCESS_MODE, COMP_BROWSER, HIGH_AVAILABLE_TECH, LOAD_BALANCE, OPR_SYSTEM, SYS_DATABASE, MIDDLEWARE, INNER_JK_PASS, SYS_STATUS, SYS_CREATE_TIME, SYS_CREATE_USER, SYS_UPDATE_TIME, SYS_UPDATE_USER, SYS_PV_ID, SYS_SC_ID, AUTH_TYPE, CONNECT_TO_ESB, CHANNEL_CODE, COMMUNICATION_PROTOCOL, MESSAGE_FORMAT, SYS_PARTITION, INTEGRATION_MODE from opr_system
+    </sql>
+
+    <select id="selectOprSystemList" parameterType="OprSystem" resultMap="OprSystemResult">
+        SELECT
+        "os".SYS_ID,
+        "os".SYS_CODE,
+        "os".SYS_NAME,
+        "os".SYS_DES,
+        "os".AREA_ID,
+        "os".SYSTEM_LAYER,
+        "os".DEVELOPER,
+        "os".ONLINE_DATE,
+        "os".OFFLINE_DATE,
+        "os".TECH_DEPT,
+        "os".MANAGER_ID,
+        "os".APP_COOR_USERS,
+        "os".BUSI_DEPT,
+        "os".BUSI_LEADER,
+        "os".OPR_LEADER,
+        "os".DISA_LEVEL,
+        "os".DISA_MODE,
+        "os".DISA_REC_RTO_TIME,
+        "os".DISA_REC_RPO_TIME,
+        "os".DISA_SYSTEM_NOTE,
+        "os".SEC_LEVEL,
+        "os".CONT_PLAN,
+        "os".MONITOR,
+        "os".SERVICE_TIME,
+        "os".SYS_USER,
+        "os".SERVICE_AREA,
+        "os".FACE_TO_CUST,
+        "os".TIME_OUT,
+        "os".SYS_TYPE,
+        "os".ACCESS_MODE,
+        "os".COMP_BROWSER,
+        "os".HIGH_AVAILABLE_TECH,
+        "os".LOAD_BALANCE,
+        "os".OPR_SYSTEM,
+        "os".SYS_DATABASE,
+        "os".MIDDLEWARE,
+        "os".INNER_JK_PASS,
+        "os".SYS_STATUS,
+        "os".SYS_CREATE_TIME,
+        "os".SYS_CREATE_USER,
+        "os".SYS_UPDATE_TIME,
+        "os".SYS_UPDATE_USER,
+        "os".SYS_PV_ID,
+        "os".SYS_SC_ID,
+        "os".AUTH_TYPE,
+        "os".CONNECT_TO_ESB,
+        "os".CHANNEL_CODE,
+        "os".COMMUNICATION_PROTOCOL,
+        "os".MESSAGE_FORMAT,
+        "os".SYS_PARTITION,
+        "os".INTEGRATION_MODE,
+        "u".NICK_NAME
+        FROM
+        opr_system "os"
+        LEFT JOIN SYS_USER "u" ON "os".MANAGER_ID = "u".USER_ID
+        <where>
+            <if test="sysName != null  and sysName != ''">and "os".SYS_NAME like concat(concat('%', #{sysName}), '%')</if>
+            <if test="systemLayer != null  and systemLayer != ''">and "os".SYSTEM_LAYER = #{systemLayer}</if>
+            <if test="techDept != null  and techDept != ''">and "os".TECH_DEPT = #{techDept}</if>
+            <if test="managerId != null  and managerId != ''">and "os".MANAGER_ID = #{managerId}</if>
+            <if test="sysStatus != null  and sysStatus != ''">and "os".SYS_STATUS = #{sysStatus}</if>
+            <if test="connectToEsb != null  and connectToEsb != ''">and "os".CONNECT_TO_ESB = #{connectToEsb}</if>
+        </where>
+    </select>
+
+    <select id="selectOprSystemById" parameterType="String" resultMap="OprSystemResult">
+        <include refid="selectOprSystemVo"/>
+        where SYS_ID = #{sysId}
+    </select>
+
+    <insert id="insertOprSystem" parameterType="OprSystem">
+        insert into opr_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysId != null">SYS_ID,</if>
+            <if test="sysCode != null and sysCode != ''">SYS_CODE,</if>
+            <if test="sysName != null and sysName != ''">SYS_NAME,</if>
+            <if test="sysDes != null">SYS_DES,</if>
+            <if test="areaId != null and areaId != ''">AREA_ID,</if>
+            <if test="systemLayer != null and systemLayer != ''">SYSTEM_LAYER,</if>
+            <if test="developer != null">DEVELOPER,</if>
+            <if test="onlineDate != null">ONLINE_DATE,</if>
+            <if test="offlineDate != null">OFFLINE_DATE,</if>
+            <if test="techDept != null">TECH_DEPT,</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID,</if>
+            <if test="appCoorUsers != null">APP_COOR_USERS,</if>
+            <if test="busiDept != null">BUSI_DEPT,</if>
+            <if test="busiLeader != null">BUSI_LEADER,</if>
+            <if test="oprLeader != null">OPR_LEADER,</if>
+            <if test="disaLevel != null">DISA_LEVEL,</if>
+            <if test="disaMode != null">DISA_MODE,</if>
+            <if test="disaRecRtoTime != null">DISA_REC_RTO_TIME,</if>
+            <if test="disaRecRpoTime != null">DISA_REC_RPO_TIME,</if>
+            <if test="disaSystemNote != null">DISA_SYSTEM_NOTE,</if>
+            <if test="secLevel != null">SEC_LEVEL,</if>
+            <if test="contPlan != null">CONT_PLAN,</if>
+            <if test="monitor != null">MONITOR,</if>
+            <if test="serviceTime != null">SERVICE_TIME,</if>
+            <if test="sysUser != null">SYS_USER,</if>
+            <if test="serviceArea != null">SERVICE_AREA,</if>
+            <if test="faceToCust != null">FACE_TO_CUST,</if>
+            <if test="timeOut != null and timeOut != ''">TIME_OUT,</if>
+            <if test="sysType != null">SYS_TYPE,</if>
+            <if test="accessMode != null">ACCESS_MODE,</if>
+            <if test="compBrowser != null">COMP_BROWSER,</if>
+            <if test="highAvailableTech != null">HIGH_AVAILABLE_TECH,</if>
+            <if test="loadBalance != null">LOAD_BALANCE,</if>
+            <if test="oprSystem != null">OPR_SYSTEM,</if>
+            <if test="sysDatabase != null">SYS_DATABASE,</if>
+            <if test="middleware != null">MIDDLEWARE,</if>
+            <if test="innerJkPass != null and innerJkPass != ''">INNER_JK_PASS,</if>
+            <if test="sysStatus != null and sysStatus != ''">SYS_STATUS,</if>
+            <if test="sysCreateTime != null">SYS_CREATE_TIME,</if>
+            <if test="sysCreateUser != null">SYS_CREATE_USER,</if>
+            <if test="sysUpdateTime != null">SYS_UPDATE_TIME,</if>
+            <if test="sysUpdateUser != null">SYS_UPDATE_USER,</if>
+            <if test="sysPvId != null">SYS_PV_ID,</if>
+            <if test="sysScId != null and sysScId != ''">SYS_SC_ID,</if>
+            <if test="authType != null">AUTH_TYPE,</if>
+            <if test="connectToEsb != null">CONNECT_TO_ESB,</if>
+            <if test="channelCode != null">CHANNEL_CODE,</if>
+            <if test="communicationProtocol != null">COMMUNICATION_PROTOCOL,</if>
+            <if test="messageFormat != null">MESSAGE_FORMAT,</if>
+            <if test="sysPartition != null">SYS_PARTITION,</if>
+            <if test="integrationMode != null">INTEGRATION_MODE,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysId != null">#{sysId},</if>
+            <if test="sysCode != null and sysCode != ''">#{sysCode},</if>
+            <if test="sysName != null and sysName != ''">#{sysName},</if>
+            <if test="sysDes != null">#{sysDes},</if>
+            <if test="areaId != null and areaId != ''">#{areaId},</if>
+            <if test="systemLayer != null and systemLayer != ''">#{systemLayer},</if>
+            <if test="developer != null">#{developer},</if>
+            <if test="onlineDate != null">#{onlineDate},</if>
+            <if test="offlineDate != null">#{offlineDate},</if>
+            <if test="techDept != null">#{techDept},</if>
+            <if test="managerId != null and managerId != ''">#{managerId},</if>
+            <if test="appCoorUsers != null">#{appCoorUsers},</if>
+            <if test="busiDept != null">#{busiDept},</if>
+            <if test="busiLeader != null">#{busiLeader},</if>
+            <if test="oprLeader != null">#{oprLeader},</if>
+            <if test="disaLevel != null">#{disaLevel},</if>
+            <if test="disaMode != null">#{disaMode},</if>
+            <if test="disaRecRtoTime != null">#{disaRecRtoTime},</if>
+            <if test="disaRecRpoTime != null">#{disaRecRpoTime},</if>
+            <if test="disaSystemNote != null">#{disaSystemNote},</if>
+            <if test="secLevel != null">#{secLevel},</if>
+            <if test="contPlan != null">#{contPlan},</if>
+            <if test="monitor != null">#{monitor},</if>
+            <if test="serviceTime != null">#{serviceTime},</if>
+            <if test="sysUser != null">#{sysUser},</if>
+            <if test="serviceArea != null">#{serviceArea},</if>
+            <if test="faceToCust != null">#{faceToCust},</if>
+            <if test="timeOut != null and timeOut != ''">#{timeOut},</if>
+            <if test="sysType != null">#{sysType},</if>
+            <if test="accessMode != null">#{accessMode},</if>
+            <if test="compBrowser != null">#{compBrowser},</if>
+            <if test="highAvailableTech != null">#{highAvailableTech},</if>
+            <if test="loadBalance != null">#{loadBalance},</if>
+            <if test="oprSystem != null">#{oprSystem},</if>
+            <if test="sysDatabase != null">#{sysDatabase},</if>
+            <if test="middleware != null">#{middleware},</if>
+            <if test="innerJkPass != null and innerJkPass != ''">#{innerJkPass},</if>
+            <if test="sysStatus != null and sysStatus != ''">#{sysStatus},</if>
+            <if test="sysCreateTime != null">#{sysCreateTime},</if>
+            <if test="sysCreateUser != null">#{sysCreateUser},</if>
+            <if test="sysUpdateTime != null">#{sysUpdateTime},</if>
+            <if test="sysUpdateUser != null">#{sysUpdateUser},</if>
+            <if test="sysPvId != null">#{sysPvId},</if>
+            <if test="sysScId != null and sysScId != ''">#{sysScId},</if>
+            <if test="authType != null">#{authType},</if>
+            <if test="connectToEsb != null">#{connectToEsb},</if>
+            <if test="channelCode != null">#{channelCode},</if>
+            <if test="communicationProtocol != null">#{communicationProtocol},</if>
+            <if test="messageFormat != null">#{messageFormat},</if>
+            <if test="sysPartition != null">#{sysPartition},</if>
+            <if test="integrationMode != null">#{integrationMode},</if>
+        </trim>
+    </insert>
+
+    <update id="updateOprSystem" parameterType="OprSystem">
+        update opr_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sysCode != null and sysCode != ''">SYS_CODE = #{sysCode},</if>
+            <if test="sysName != null and sysName != ''">SYS_NAME = #{sysName},</if>
+            <if test="sysDes != null">SYS_DES = #{sysDes},</if>
+            <if test="areaId != null and areaId != ''">AREA_ID = #{areaId},</if>
+            <if test="systemLayer != null and systemLayer != ''">SYSTEM_LAYER = #{systemLayer},</if>
+            <if test="developer != null">DEVELOPER = #{developer},</if>
+            <if test="onlineDate != null">ONLINE_DATE = #{onlineDate},</if>
+            <if test="offlineDate != null">OFFLINE_DATE = #{offlineDate},</if>
+            <if test="techDept != null">TECH_DEPT = #{techDept},</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID = #{managerId},</if>
+            <if test="appCoorUsers != null">APP_COOR_USERS = #{appCoorUsers},</if>
+            <if test="busiDept != null">BUSI_DEPT = #{busiDept},</if>
+            <if test="busiLeader != null">BUSI_LEADER = #{busiLeader},</if>
+            <if test="oprLeader != null">OPR_LEADER = #{oprLeader},</if>
+            <if test="disaLevel != null">DISA_LEVEL = #{disaLevel},</if>
+            <if test="disaMode != null">DISA_MODE = #{disaMode},</if>
+            <if test="disaRecRtoTime != null">DISA_REC_RTO_TIME = #{disaRecRtoTime},</if>
+            <if test="disaRecRpoTime != null">DISA_REC_RPO_TIME = #{disaRecRpoTime},</if>
+            <if test="disaSystemNote != null">DISA_SYSTEM_NOTE = #{disaSystemNote},</if>
+            <if test="secLevel != null">SEC_LEVEL = #{secLevel},</if>
+            <if test="contPlan != null">CONT_PLAN = #{contPlan},</if>
+            <if test="monitor != null">MONITOR = #{monitor},</if>
+            <if test="serviceTime != null">SERVICE_TIME = #{serviceTime},</if>
+            <if test="sysUser != null">SYS_USER = #{sysUser},</if>
+            <if test="serviceArea != null">SERVICE_AREA = #{serviceArea},</if>
+            <if test="faceToCust != null">FACE_TO_CUST = #{faceToCust},</if>
+            <if test="timeOut != null and timeOut != ''">TIME_OUT = #{timeOut},</if>
+            <if test="sysType != null">SYS_TYPE = #{sysType},</if>
+            <if test="accessMode != null">ACCESS_MODE = #{accessMode},</if>
+            <if test="compBrowser != null">COMP_BROWSER = #{compBrowser},</if>
+            <if test="highAvailableTech != null">HIGH_AVAILABLE_TECH = #{highAvailableTech},</if>
+            <if test="loadBalance != null">LOAD_BALANCE = #{loadBalance},</if>
+            <if test="oprSystem != null">OPR_SYSTEM = #{oprSystem},</if>
+            <if test="sysDatabase != null">SYS_DATABASE = #{sysDatabase},</if>
+            <if test="middleware != null">MIDDLEWARE = #{middleware},</if>
+            <if test="innerJkPass != null and innerJkPass != ''">INNER_JK_PASS = #{innerJkPass},</if>
+            <if test="sysStatus != null and sysStatus != ''">SYS_STATUS = #{sysStatus},</if>
+            <if test="sysCreateTime != null">SYS_CREATE_TIME = #{sysCreateTime},</if>
+            <if test="sysCreateUser != null">SYS_CREATE_USER = #{sysCreateUser},</if>
+            <if test="sysUpdateTime != null">SYS_UPDATE_TIME = #{sysUpdateTime},</if>
+            <if test="sysUpdateUser != null">SYS_UPDATE_USER = #{sysUpdateUser},</if>
+            <if test="sysPvId != null">SYS_PV_ID = #{sysPvId},</if>
+            <if test="sysScId != null and sysScId != ''">SYS_SC_ID = #{sysScId},</if>
+            <if test="authType != null">AUTH_TYPE = #{authType},</if>
+            <if test="connectToEsb != null">CONNECT_TO_ESB = #{connectToEsb},</if>
+            <if test="channelCode != null">CHANNEL_CODE = #{channelCode},</if>
+            <if test="communicationProtocol != null">COMMUNICATION_PROTOCOL = #{communicationProtocol},</if>
+            <if test="messageFormat != null">MESSAGE_FORMAT = #{messageFormat},</if>
+            <if test="sysPartition != null">SYS_PARTITION = #{sysPartition},</if>
+            <if test="integrationMode != null">INTEGRATION_MODE = #{integrationMode},</if>
+        </trim>
+        where SYS_ID = #{sysId}
+    </update>
+
+    <delete id="deleteOprSystemById" parameterType="String">
+        delete from opr_system where SYS_ID = #{sysId}
+    </delete>
+
+    <delete id="deleteOprSystemByIds" parameterType="String">
+        delete from opr_system where SYS_ID in
+        <foreach item="sysId" collection="array" open="(" separator="," close=")">
+            #{sysId}
+        </foreach>
+    </delete>
+
+    <select id="getSystemNum" resultType="java.lang.Integer">
+        SELECT COUNT(SYS_ID) as sysNum FROM opr_system
+    </select>
+    <select id="getSceneNum" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT SV_SCN_ID) as sceneNum FROM opr_scenario_version
+    </select>
+    <select id="getConsumeNum" resultType="java.lang.Integer">
+        SELECT count(MAPPING_ID) as consumeNum FROM aesb_g_service_scene_mapping
+    </select>
+
+    <select id="getTrendStatistics" resultType="Trend">
+        <if test="timeType==0">
+            SELECT
+            NVL( m."dealYear", 0 ) AS "dealYear",
+            NVL( m."dealNum", 0 ) AS "dealNum",
+            NVL( m."doneYear", m."dealYear" ) AS "doneYear",
+            NVL( m."doneNum", 0 ) AS "doneNum",
+            NVL( m."faceYear", m."dealYear" ) AS "faceYear",
+            NVL( m."faceNum", 0 ) AS "faceNum"
+            FROM
+            (
+            SELECT
+            *
+            FROM
+            (
+            SELECT
+            extract( year FROM LAST_MOD_TIME ) AS "dealYear",
+            count( JK_VERSION_ID ) AS "dealNum"
+            FROM
+            aesb_g_sys_interface_info
+            WHERE
+            DELIVER_STATE = '0'
+            GROUP BY
+            extract( year FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( year FROM LAST_MOD_TIME ) ASC
+            ) t
+            LEFT JOIN (
+            SELECT
+            extract( year FROM LAST_MOD_TIME ) AS "doneYear",
+            count( JK_VERSION_ID ) AS "doneNum"
+            FROM
+            aesb_g_sys_interface_info
+            WHERE
+            DELIVER_STATE = '1'
+            GROUP BY
+            extract( year FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( year FROM LAST_MOD_TIME ) ASC
+            ) s ON t."dealYear" = s."doneYear"
+            LEFT JOIN (
+            SELECT
+            extract( year FROM LAST_MOD_TIME ) AS "faceYear",
+            count( JK_VERSION_ID ) AS "faceNum"
+            FROM
+            aesb_g_sys_interface_info
+            GROUP BY
+            extract( year FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( year FROM LAST_MOD_TIME ) ASC
+            ) f ON t."dealYear" = f."faceYear"
+            ) m
+        </if>
+        <if test="timeType==1">
+            SELECT
+                NVL( m."dealQuarter", 0 ) AS "dealQuarter",
+                NVL( m."dealNum", 0 ) AS "dealNum",
+                NVL( m."doneQuarter", m."dealQuarter" ) AS "doneQuarter",
+                NVL( m."doneNum", 0 ) AS "doneNum",
+                NVL( m."faceQuarter", m."dealQuarter" ) AS "faceQuarter",
+                NVL( m."faceNum", 0 ) AS "faceNum" FROM(
+                SELECT * FROM(
+                SELECT TO_CHAR( LAST_MOD_TIME, 'Q' ) AS "dealQuarter",count( JK_VERSION_ID ) AS "dealNum"
+                FROM aesb_g_sys_interface_info WHERE DELIVER_STATE = '0'
+                GROUP BY TO_CHAR( LAST_MOD_TIME, 'Q' )
+                ORDER BY TO_CHAR( LAST_MOD_TIME, 'Q' ) ASC) t
+                LEFT JOIN (
+                SELECT
+                TO_CHAR( LAST_MOD_TIME, 'Q' ) AS "doneQuarter",
+                count( JK_VERSION_ID ) AS "doneNum"
+                FROM aesb_g_sys_interface_info
+                WHERE DELIVER_STATE = '1'
+                GROUP BY TO_CHAR( LAST_MOD_TIME, 'Q' )
+                ORDER BY TO_CHAR( LAST_MOD_TIME, 'Q' ) ASC
+                ) s ON t."dealQuarter" = s."doneQuarter"
+                LEFT JOIN (
+                SELECT
+                TO_CHAR( LAST_MOD_TIME, 'Q' ) AS "faceQuarter",
+                count( JK_VERSION_ID ) AS "faceNum"
+                FROM aesb_g_sys_interface_info
+                GROUP BY TO_CHAR( LAST_MOD_TIME, 'Q' )
+                ORDER BY TO_CHAR( LAST_MOD_TIME, 'Q' ) ASC
+                ) f ON t."dealQuarter" = f."faceQuarter"
+            ) m
+        </if>
+        <if test="timeType==2">
+            SELECT
+            NVL( m."dealMonth", 0 ) AS "dealMonth",
+            NVL( m."dealNum", 0 ) AS "dealNum",
+            NVL( m."doneMonth", m."dealMonth" ) AS "doneMonth",
+            NVL( m."doneNum", 0 ) AS "doneNum",
+            NVL( m."faceMonth", m."dealMonth" ) AS "faceMonth",
+            NVL( m."faceNum", 0 ) AS "faceNum"
+            FROM
+            (
+            SELECT
+            *
+            FROM
+            (
+            SELECT
+            extract( month FROM LAST_MOD_TIME ) AS "dealMonth",
+            count( JK_VERSION_ID ) AS "dealNum"
+            FROM
+            aesb_g_sys_interface_info
+            WHERE
+            DELIVER_STATE = '0'
+            GROUP BY
+            extract( month FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( month FROM LAST_MOD_TIME ) ASC
+            ) t
+            LEFT JOIN (
+            SELECT
+            extract( month FROM LAST_MOD_TIME ) AS "doneMonth",
+            count( JK_VERSION_ID ) AS "doneNum"
+            FROM
+            aesb_g_sys_interface_info
+            WHERE
+            DELIVER_STATE = '1'
+            GROUP BY
+            extract( month FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( month FROM LAST_MOD_TIME ) ASC
+            ) s ON t."dealMonth" = s."doneMonth"
+            LEFT JOIN (
+            SELECT
+            extract( month FROM LAST_MOD_TIME ) AS "faceMonth",
+            count( JK_VERSION_ID ) AS "faceNum"
+            FROM
+            aesb_g_sys_interface_info
+            GROUP BY
+            extract( month FROM LAST_MOD_TIME )
+            ORDER BY
+            extract( month FROM LAST_MOD_TIME ) ASC
+            ) f ON t."dealMonth" = f."faceMonth"
+            ) m
+        </if>
+    </select>
+
+    <!--消费关系占比前10-->
+    <select id="sceneRatioChart" resultType="java.util.Map">
+        SELECT * FROM(
+        SELECT
+        "m".MAPPING_VERSION_ID AS "svId",
+        "m".PRO_SYS_ID AS "sysId",
+        "m".SERVICE_ID AS "serviceId",
+        "s".SYS_NAME AS "sysName",
+        "v".SV_NAME AS "svName",
+        count( "m".MAPPING_VERSION_ID ) AS "consumeTimes"
+        FROM
+        aesb_g_service_scene_mapping "m"
+        INNER JOIN opr_scenario_version "v" ON "m".MAPPING_VERSION_ID = "v".SV_ID
+        INNER JOIN opr_system "s" ON "m".PRO_SYS_ID = "s".SYS_ID
+        WHERE "m".MAPPING_TYPE = 1
+        GROUP BY "m".MAPPING_VERSION_ID,"s".SYS_NAME,"m".PRO_SYS_ID,"v".SV_NAME,"m".SERVICE_ID
+        ORDER BY count( "m".MAPPING_VERSION_ID ) DESC )
+        WHERE ROWNUM &lt;= 10
+    </select>
+
+    <!--服务场景占比前-->
+    <select id="serviceScene" resultType="java.util.Map">
+        SELECT * FROM (
+        SELECT PRO_SYS_ID AS "sysId",COUNT( PRO_SYS_ID ) AS "sysNum"
+        FROM AESB_G_SERVICE_SCENE_MAPPING
+        GROUP BY PRO_SYS_ID ORDER BY COUNT( PRO_SYS_ID ) DESC )
+        WHERE ROWNUM &lt;=10
+    </select>
+
+
+    <select id="getSysNameById" resultType="java.lang.String">
+        select SYS_NAME from opr_system where SYS_ID = #{sysId}
+    </select>
+
+    <select id="getSysIdByName" resultType="java.lang.String">
+        select SYS_ID from opr_system where SYS_NAME = #{sysName}
+    </select>
+
+    <select id="getSystemInfoById" resultType="oprSystem">
+        SELECT
+            "a".SYS_NAME AS "sysName",
+            "a".SYS_CODE AS "sysCode",
+            "u".USER_NAME AS "principal"
+        FROM
+            OPR_SYSTEM "a"
+                INNER JOIN SYS_USER "u" ON "a".MANAGER_ID = "u".USER_ID
+        WHERE
+            "a".SYS_ID = #{sysId}
+    </select>
+
+    <select id = "getPrincipals" resultType="map">
+        SELECT DISTINCT
+            "os".MANAGER_ID AS "value",
+            "u".NICK_NAME AS "label"
+        FROM
+            OPR_SYSTEM "os"
+                LEFT JOIN SYS_USER "u" ON "os".MANAGER_ID = "u".USER_ID
+    </select>
+
+    <select id = "getSystemLayers" resultType="string">
+        SELECT DISTINCT
+            SYSTEM_LAYER AS "value"
+        FROM
+            OPR_SYSTEM
+    </select>
+
+    <select id = "getTechDepts" resultType="string">
+        SELECT DISTINCT
+            TECH_DEPT
+        FROM
+            OPR_SYSTEM
+    </select>
+
+</mapper>
